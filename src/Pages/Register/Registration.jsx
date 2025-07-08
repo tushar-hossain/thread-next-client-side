@@ -1,21 +1,26 @@
 import React, { useState } from "react";
 import { FaEye } from "react-icons/fa";
 import { FaEyeSlash } from "react-icons/fa";
-import { Link } from "react-router";
+import { Link, useLocation, useNavigate } from "react-router";
 import SocialLogin from "./SocialLogin";
 import { useForm } from "react-hook-form";
 import axios from "axios";
 import useAuth from "../../hooks/useAuth";
+import toast from "react-hot-toast";
 
 const Registration = () => {
   const [eye, setEye] = useState(false);
-  const { setUser, loginUser, updateUser } = useAuth();
+  const { setUser, createUser, updateUser } = useAuth();
+  const navigate = useNavigate();
+  const location = useLocation();
   // react form hook
   const {
     register,
     formState: { errors },
     handleSubmit,
   } = useForm();
+
+  // submit form data
   const onSubmit = async (data) => {
     const { photo, ...userInfo } = data;
 
@@ -27,8 +32,8 @@ const Registration = () => {
     );
     userInfo.photo = res.data.data.url;
 
-    // login user
-    loginUser(userInfo.email, userInfo.password)
+    // create user
+    createUser(userInfo.email, userInfo.password)
       .then((result) => {
         // update profile in the firebase
         const userProfile = {
@@ -38,10 +43,12 @@ const Registration = () => {
         updateUser(userProfile)
           .then(() => {
             setUser(result.user);
+            toast.success("Registration successful");
+            navigate(location.state || "/");
           })
           .catch(() => {});
       })
-      .catch((err) => console.log(err));
+      .catch(() => toast.error("Registration failed"));
   };
 
   return (

@@ -2,8 +2,19 @@ import React from "react";
 import logo from "../../assets/image/logo-bird.png";
 import logoText from "../../assets/image/logo-text.png";
 import { Link, NavLink } from "react-router";
+import useAuth from "../../hooks/useAuth";
+import toast from "react-hot-toast";
 
 const Navbar = () => {
+  const { user, logOut } = useAuth();
+
+  // logout user
+  const handleLogout = () => {
+    logOut()
+      .then(() => toast.success("Log-out successful"))
+      .catch(() => toast.error("Logout failed"));
+  };
+
   const links = (
     <>
       <li>
@@ -61,44 +72,44 @@ const Navbar = () => {
           </ul>
         </div>
         <div className="navbar-end">
-          <div className="dropdown dropdown-end">
-            <div
-              tabIndex={0}
-              role="button"
-              className="btn btn-ghost btn-circle avatar"
-            >
-              <div className="w-10 rounded-full">
-                <img
-                  alt="Tailwind CSS Navbar component"
-                  src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp"
-                />
+          {/* conditional rendering */}
+          {user ? (
+            <div className="dropdown dropdown-end">
+              <div
+                tabIndex={0}
+                role="button"
+                className="btn btn-ghost btn-circle avatar"
+              >
+                <div className="w-10 rounded-full border">
+                  <img alt="user image" src={user?.photoURL} />
+                </div>
               </div>
+              <ul
+                tabIndex={0}
+                className="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow text-black"
+              >
+                <li>
+                  <p className="font-bold">John Doe</p>
+                </li>
+                <li>
+                  <a>Dashboard</a>
+                </li>
+                <li>
+                  <a onClick={handleLogout}>Logout</a>
+                </li>
+              </ul>
             </div>
-            <ul
-              tabIndex={0}
-              className="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow text-black"
+          ) : (
+            <NavLink
+              to="/joinUs"
+              className="btn bg-blue-500 hover:bg-blue-600 text-white rounded"
             >
-              <li>
-                <p className="font-bold">John Doe</p>
-              </li>
-              <li>
-                <a>Dashboard</a>
-              </li>
-              <li>
-                <a>Logout</a>
-              </li>
-            </ul>
-          </div>
-          {/* join us */}
-          <NavLink
-            to="/joinUs"
-            className="btn bg-blue-500 hover:bg-blue-600 text-white rounded"
-          >
-            Join Us
-          </NavLink>
+              Join Us
+            </NavLink>
+          )}
 
           {/* notification */}
-          <div className="indicator">
+          <button disabled={true} className="indicator ml-5 cursor-pointer">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               className="h-5 w-5 text-black"
@@ -114,7 +125,7 @@ const Navbar = () => {
               />
             </svg>
             <span className="badge badge-xs bg-red-500  indicator-item "></span>
-          </div>
+          </button>
         </div>
       </div>
     </div>

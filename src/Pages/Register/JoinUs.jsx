@@ -1,18 +1,32 @@
 import React, { useState } from "react";
 import { FaEye } from "react-icons/fa";
 import { FaEyeSlash } from "react-icons/fa";
-import { Link } from "react-router";
+import { Link, useLocation, useNavigate } from "react-router";
 import SocialLogin from "./SocialLogin";
 import { useForm } from "react-hook-form";
+import useAuth from "../../hooks/useAuth";
+import toast from "react-hot-toast";
 
 const JoinUs = () => {
   const [eye, setEye] = useState(false);
+  const { setUser, loginUser } = useAuth();
+  const navigate = useNavigate();
+  const location = useLocation();
+
   const {
     register,
     formState: { errors },
     handleSubmit,
   } = useForm();
-  const onSubmit = (data) => console.log(data);
+  const onSubmit = (data) => {
+    loginUser(data.email, data.password)
+      .then((result) => {
+        setUser(result.user);
+        toast.success("Login successful");
+        navigate(location.state || "/");
+      })
+      .catch(() => toast.error("Login failed"));
+  };
 
   return (
     <div className="py-10">
