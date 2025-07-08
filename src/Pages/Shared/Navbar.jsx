@@ -16,7 +16,7 @@ const Navbar = () => {
   );
   return (
     <div className="bg-base-300">
-      <div className="w-11/12 mx-auto flex items-center p-0 py-6 text-white">
+      <div className="w-11/12 mx-auto flex items-center p-0 py-3 text-white">
         <div className="navbar-start">
           <div className="dropdown">
             <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
@@ -90,9 +90,12 @@ const Navbar = () => {
             </ul>
           </div>
           {/* join us */}
-          <button class="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded">
+          <NavLink
+            to="/joinUs"
+            className="btn bg-blue-500 hover:bg-blue-600 text-white rounded"
+          >
             Join Us
-          </button>
+          </NavLink>
 
           {/* notification */}
           <div className="indicator">

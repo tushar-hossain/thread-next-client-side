@@ -2,6 +2,7 @@ import { createBrowserRouter } from "react-router";
 import RootLayouts from "../Layouts/RootLayouts";
 import Home from "../Pages/Home/Home";
 import Membership from "../Pages/Membership/Membership";
+import JoinUs from "../Pages/Register/JoinUs";
 
 export const router = createBrowserRouter([
   {
@@ -10,6 +11,7 @@ export const router = createBrowserRouter([
     children: [
       { index: true, Component: Home },
       { path: "membership", Component: Membership },
+      { path: "joinUs", Component: JoinUs },
     ],
   },
 ]);
