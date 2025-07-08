@@ -3,16 +3,37 @@ import { FaEye } from "react-icons/fa";
 import { FaEyeSlash } from "react-icons/fa";
 import { Link } from "react-router";
 import SocialLogin from "./SocialLogin";
+import { useForm } from "react-hook-form";
+import axios from "axios";
 
 const Registration = () => {
   const [eye, setEye] = useState(false);
+  const {
+    register,
+    formState: { errors },
+    handleSubmit,
+  } = useForm();
+  const onSubmit = async (data) => {
+    const { photo, ...userInfo } = data;
+
+    const formData = new FormData();
+    formData.append("image", photo[0]);
+    const res = await axios.post(
+      `https://api.imgbb.com/1/upload?key=${import.meta.env.VITE_IMGB_API}`,
+      formData
+    );
+    userInfo.photo = res.data.data.url;
+
+    console.log(userInfo);
+  };
+
   return (
     <div className="py-10">
       <div className="flex flex-col max-w-md mx-auto p-10 space-y-2 text-center bg-[#111827] text-gray-50 rounded-lg">
         <h1 className="text-xl md:text-3xl font-semibold">
           Register in your account
         </h1>
-        <form className="space-y-2">
+        <form onSubmit={handleSubmit(onSubmit)} className="space-y-2">
           <div className="flex flex-col">
             {/* name */}
             <div>
@@ -20,32 +41,43 @@ const Registration = () => {
                 Name
               </label>
               <input
-                id="name"
                 type="text"
                 placeholder="Name"
+                {...register("name", { required: true })}
+                aria-invalid={errors.name ? "true" : "false"}
                 className="rounded-t-md border px-2 focus:ring-2 w-full py-2 bg-gray-50 text-black"
               />
+              {errors.name?.type === "required" && (
+                <p className="text-red-500 text-sm">Name is required</p>
+              )}
             </div>
+
             {/* email */}
             <div>
               <label htmlFor="email" className="sr-only">
                 Email address
               </label>
               <input
-                id="email"
                 type="email"
+                {...register("email", { required: true })}
+                aria-invalid={errors.email ? "true" : "false"}
                 placeholder="Email address"
                 className="border px-2 focus:ring-2 w-full py-2 bg-gray-50 text-black"
               />
+              {errors.name?.type === "required" && (
+                <p className="text-red-500 text-sm">Email is required</p>
+              )}
             </div>
+
             {/* password */}
             <div className="relative">
               <label htmlFor="password" className="sr-only">
                 Photo
               </label>
               <input
-                id="password"
                 type={eye ? "text" : "password"}
+                {...register("password", { required: true })}
+                aria-invalid={errors.password ? "true" : "false"}
                 placeholder="Password"
                 className="border px-2 focus:ring-2 w-full py-2 bg-gray-50 text-black"
               />
@@ -55,6 +87,9 @@ const Registration = () => {
               >
                 {eye ? <FaEyeSlash /> : <FaEye />}
               </p>
+              {errors.password?.type === "required" && (
+                <p className="text-red-500 text-sm">Password is required</p>
+              )}
             </div>
             {/* photo */}
             <div>
@@ -62,18 +97,22 @@ const Registration = () => {
                 Photo
               </label>
               <input
-                id="photo"
                 type="file"
                 placeholder="Your photo"
+                {...register("photo", { required: true })}
+                aria-invalid={errors.photo ? "true" : "false"}
                 className="rounded-b-md border px-2 focus:ring-2 w-full py-2 bg-gray-50 text-black"
               />
+              {errors.photo?.type === "required" && (
+                <p className="text-red-500 text-sm">Photo is required</p>
+              )}
             </div>
           </div>
 
           <input
             className="btn bg-blue-500 hover:bg-blue-600 text-white rounded w-full"
             type="submit"
-            value="Sign in"
+            value="Register"
           />
         </form>
         <div className="divider">OR</div>

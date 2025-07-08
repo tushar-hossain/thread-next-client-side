@@ -3,9 +3,16 @@ import { FaEye } from "react-icons/fa";
 import { FaEyeSlash } from "react-icons/fa";
 import { Link } from "react-router";
 import SocialLogin from "./SocialLogin";
+import { useForm } from "react-hook-form";
 
 const JoinUs = () => {
   const [eye, setEye] = useState(false);
+  const {
+    register,
+    formState: { errors },
+    handleSubmit,
+  } = useForm();
+  const onSubmit = (data) => console.log(data);
 
   return (
     <div className="py-10">
@@ -13,7 +20,7 @@ const JoinUs = () => {
         <h1 className="text-xl md:text-3xl font-semibold">
           Sign in your account
         </h1>
-        <form className="space-y-2">
+        <form onSubmit={handleSubmit(onSubmit)} className="space-y-2">
           <div className="flex flex-col">
             {/* email */}
             <div>
@@ -21,20 +28,26 @@ const JoinUs = () => {
                 Email address
               </label>
               <input
-                id="email"
                 type="email"
+                {...register("email", { required: true })}
+                aria-invalid={errors.email ? "true" : "false"}
                 placeholder="Email address"
                 className="rounded-t-md border px-2 focus:ring-2 w-full py-2 bg-gray-50 text-black"
               />
             </div>
+            {errors.email?.type === "required" && (
+              <p className="text-red-500 text-sm">Email name is required</p>
+            )}
+
             {/* password */}
             <div className="relative">
               <label htmlFor="password" className="sr-only">
-                Photo
+                Password
               </label>
               <input
-                id="password"
                 type={eye ? "text" : "password"}
+                {...register("password", { required: true })}
+                aria-invalid={errors.password ? "true" : "false"}
                 placeholder="Password"
                 className="rounded-b-md border px-2 focus:ring-2 w-full py-2 bg-gray-50 text-black"
               />
@@ -45,6 +58,9 @@ const JoinUs = () => {
                 {eye ? <FaEyeSlash /> : <FaEye />}
               </p>
             </div>
+            {errors.password && (
+              <p className="text-red-500 text-sm">Password field is required</p>
+            )}
           </div>
           {/* forgot password */}
           <div className="flex justify-between">
