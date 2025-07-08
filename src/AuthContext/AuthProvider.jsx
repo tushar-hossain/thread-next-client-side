@@ -1,8 +1,9 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { AuthContext } from "./AuthContext";
 import {
   createUserWithEmailAndPassword,
   GoogleAuthProvider,
+  onAuthStateChanged,
   signInWithPopup,
   signOut,
   updateProfile,
@@ -47,6 +48,18 @@ const AuthProvider = ({ children }) => {
     loginWithGoogle,
     logOut,
   };
+
+  useEffect(() => {
+    const unSubscribe = onAuthStateChanged(auth, (user) => {
+      setUser(user);
+      setLoading(false);
+
+      console.log(user);
+    });
+    return () => {
+      unSubscribe();
+    };
+  }, []);
 
   return (
     <AuthContext.Provider value={userInfo}>{children}</AuthContext.Provider>

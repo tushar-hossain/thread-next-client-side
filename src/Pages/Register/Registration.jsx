@@ -5,9 +5,12 @@ import { Link } from "react-router";
 import SocialLogin from "./SocialLogin";
 import { useForm } from "react-hook-form";
 import axios from "axios";
+import useAuth from "../../hooks/useAuth";
 
 const Registration = () => {
   const [eye, setEye] = useState(false);
+  const { setUser, loginUser, updateUser } = useAuth();
+  // react form hook
   const {
     register,
     formState: { errors },
@@ -24,7 +27,21 @@ const Registration = () => {
     );
     userInfo.photo = res.data.data.url;
 
-    console.log(userInfo);
+    // login user
+    loginUser(userInfo.email, userInfo.password)
+      .then((result) => {
+        // update profile in the firebase
+        const userProfile = {
+          displayName: userInfo.name,
+          photoURL: userInfo.photo,
+        };
+        updateUser(userProfile)
+          .then(() => {
+            setUser(result.user);
+          })
+          .catch(() => {});
+      })
+      .catch((err) => console.log(err));
   };
 
   return (
@@ -118,6 +135,7 @@ const Registration = () => {
         <div className="divider">OR</div>
         {/* Google */}
         <SocialLogin />
+
         <p className="text-xs text-center sm:px-6 dark:text-white">
           Already have an account?{" "}
           <Link to="/joinUs" className=" underline font-bold">

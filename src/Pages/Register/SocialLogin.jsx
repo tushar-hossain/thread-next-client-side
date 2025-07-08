@@ -1,8 +1,23 @@
 import React from "react";
+import useAuth from "../../hooks/useAuth";
 
 const SocialLogin = () => {
+  const { setUser, loginWithGoogle } = useAuth();
+
+  const handleGoogleLogin = () => {
+    loginWithGoogle()
+      .then((result) => {
+        setUser(result.user);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
   return (
-    <button className="btn bg-blue-500 hover:bg-blue-600 text-white rounded w-full">
+    <button
+      onClick={handleGoogleLogin}
+      className="btn bg-blue-500 hover:bg-blue-600 text-white rounded w-full"
+    >
       <svg
         aria-label="Google logo"
         width="16"
