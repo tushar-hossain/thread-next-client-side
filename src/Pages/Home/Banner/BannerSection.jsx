@@ -26,8 +26,6 @@ const BannerSection = () => {
     },
   });
 
-  console.log(searchResult);
-
   const handelSearch = (e) => {
     e.preventDefault();
     if (searchItem.trim()) {
