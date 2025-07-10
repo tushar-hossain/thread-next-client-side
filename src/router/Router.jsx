@@ -4,6 +4,7 @@ import Home from "../Pages/Home/Home";
 import Membership from "../Pages/Membership/Membership";
 import JoinUs from "../Pages/Register/JoinUs";
 import Registration from "../Pages/Register/Registration";
+import Announcement from "../Pages/Announcement/Announcement";
 
 export const router = createBrowserRouter([
   {
@@ -14,6 +15,7 @@ export const router = createBrowserRouter([
       { path: "membership", Component: Membership },
       { path: "joinUs", Component: JoinUs },
       { path: "register", Component: Registration },
+      { path: "announcement", Component: Announcement },
     ],
   },
 ]);

@@ -1,5 +1,6 @@
 import React from "react";
 import BannerSection from "./Banner/BannerSection";
+import AllTags from "./AllTags/AllTags";
 
 const Home = () => {
   return (
@@ -9,7 +10,9 @@ const Home = () => {
       </section>
 
       {/* all post */}
-      <section></section>
+      <section>
+        <AllTags />
+      </section>
     </div>
   );
 };
