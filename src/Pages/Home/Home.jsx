@@ -7,6 +7,9 @@ const Home = () => {
       <section>
         <BannerSection />
       </section>
+
+      {/* all post */}
+      <section></section>
     </div>
   );
 };

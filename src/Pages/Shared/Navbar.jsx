@@ -89,7 +89,7 @@ const Navbar = () => {
                 className="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow text-black"
               >
                 <li>
-                  <p className="font-bold">John Doe</p>
+                  <p className="font-bold">{user?.displayName}</p>
                 </li>
                 <li>
                   <a>Dashboard</a>
