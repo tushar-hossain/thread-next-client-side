@@ -6,6 +6,8 @@ import JoinUs from "../Pages/Register/JoinUs";
 import Registration from "../Pages/Register/Registration";
 import Announcement from "../Pages/Announcement/Announcement";
 import PostDetails from "../Pages/Home/PostDetails/PostDetails";
+import PrivateRoute from "../Routes/PrivateRoute";
+import Payment from "../Pages/Membership/Payment/Payment";
 
 export const router = createBrowserRouter([
   {
@@ -13,11 +15,29 @@ export const router = createBrowserRouter([
     Component: RootLayouts,
     children: [
       { index: true, Component: Home },
-      { path: "membership", Component: Membership },
+      {
+        path: "membership",
+        element: (
+          <PrivateRoute>
+            <Membership />
+          </PrivateRoute>
+        ),
+      },
       { path: "joinUs", Component: JoinUs },
       { path: "register", Component: Registration },
       { path: "announcement", Component: Announcement },
-      { path: "postDetails/:id", Component: PostDetails },
+      {
+        path: "postDetails/:id",
+        element: (
+          <PrivateRoute>
+            <PostDetails />
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "payment",
+        Component: Payment,
+      },
     ],
   },
 ]);
