@@ -85,7 +85,7 @@ const PostList = () => {
             </div>
 
             <div className="text-sm text-gray-500 mb-2">
-              {new Date(post.createdAt).toLocaleDateString()}
+              {new Date(post.createdAt).toLocaleString()}
             </div>
 
             {/* vote count  */}
@@ -104,7 +104,7 @@ const PostList = () => {
             {/* view details page link */}
             <div className="mt-4 text-right">
               <Link
-                to={`/pots/${post._id}`}
+                to={`postDetails/${post?._id}`}
                 className="btn btn-sm btn-outline btn-primary w-full"
               >
                 View Details
@@ -120,7 +120,7 @@ const PostList = () => {
           <button
             onClick={() => setPage(index + 1)}
             key={index}
-            className={`btn btn-sm ${
+            className={`btn bg-blue-500 hover:bg-blue-600 text-white rounded ${
               page === index + 1 ? "btn-primary" : "btn-outline"
             }`}
           >

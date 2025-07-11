@@ -5,6 +5,7 @@ import Loading from "../../Shared/Loading";
 import { AiFillLike } from "react-icons/ai";
 import { BiSolidDislike } from "react-icons/bi";
 import { FaComment } from "react-icons/fa";
+import { Link } from "react-router";
 
 const BannerSection = () => {
   const [searchItem, setSearchItem] = useState("");
@@ -71,16 +72,16 @@ const BannerSection = () => {
         )}
 
         {!isPending && !isError && searchResult.length > 0 && (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+          <div className="grid justify-center gap-4">
             {searchResult.map((post) => (
-              <div key={post._id} className="bg-base-100 p-3 rounded-lg">
-                <div className="flex items-center gap-3 mb-2">
+              <div key={post._id} className="bg-base-100 p-3 w-fit rounded-lg">
+                <div className="mb-2">
                   <img
                     src={post.authorImage}
                     alt="Author"
-                    className="w-10 h-10 rounded-full"
+                    className="w-30 h-30 mx-auto rounded-lg mb-3"
                   />
-                  <div>
+                  <div className="text-center">
                     <h2 className="font-bold font-poppins">{post.title}</h2>
                     <p className="text-sm text-gray-500">
                       by {post.authorName}
@@ -109,6 +110,12 @@ const BannerSection = () => {
                     <FaComment size={20} /> {post.commentCount}
                   </span>
                 </div>
+                <Link
+                  to={`/postDetails/${post._id}`}
+                  className="btn  bg-blue-500 hover:bg-blue-600 text-white rounded mt-3 w-full"
+                >
+                  Read More
+                </Link>
               </div>
             ))}
           </div>
