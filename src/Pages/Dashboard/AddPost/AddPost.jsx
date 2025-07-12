@@ -4,11 +4,35 @@ import { useForm } from "react-hook-form";
 import Select from "react-select";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import toast from "react-hot-toast";
+import { useQuery } from "@tanstack/react-query";
+import Loading from "../../Shared/Loading";
+import { useNavigate } from "react-router";
 
 const AddPost = () => {
   const { user } = useAuth();
   const [selectedTags, setSelectedTags] = useState([]);
   const axiosSecure = useAxiosSecure();
+  const navigate = useNavigate();
+
+  const { data: postCount = 0, isLoading } = useQuery({
+    queryKey: ["postCount", user?.email],
+    enabled: !!user?.email,
+    queryFn: async () => {
+      const { data } = await axiosSecure.get(
+        `/posts/count?email=${user.email}`
+      );
+      return data;
+    },
+  });
+
+  const { data: profile } = useQuery({
+    queryKey: ["userProfile", user?.email],
+    enabled: !!user?.email,
+    queryFn: async () => {
+      const res = await axiosSecure.get(`/users?email=${user.email}`);
+      return res.data;
+    },
+  });
 
   const {
     register,
@@ -46,11 +70,28 @@ const AddPost = () => {
     const res = await axiosSecure.post(`/posts`, postData);
 
     if (res.data.insertedId) {
-      toast.success("Post created!");
+      toast.success("Post successful created!");
       reset();
       setSelectedTags([]);
     }
   };
+
+  if (isLoading) return <Loading />;
+
+  // 5 posts if not gold
+  if (profile?.membership !== "gold" && postCount >= 5) {
+    return (
+      <div className="text-center mt-10">
+        <p className="mb-4">You've reached your 5 post limit.</p>
+        <button
+          onClick={() => navigate("/membership")}
+          className="btn btn-primary"
+        >
+          Become a Member
+        </button>
+      </div>
+    );
+  }
 
   return (
     <div>
