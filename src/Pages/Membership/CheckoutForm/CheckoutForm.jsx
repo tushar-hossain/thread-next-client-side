@@ -37,8 +37,6 @@ const CheckoutForm = () => {
       setPaymentError(error.message);
       setProcessing(false);
     } else {
-      console.log(paymentMethod);
-
       const { data } = await axiosSecure.post(`/create-payment-intent`, {
         amount,
       });
@@ -70,9 +68,7 @@ const CheckoutForm = () => {
           toast.success("Payment Successful!");
           navigate("/");
         }
-        console.log(data);
       }
-
       setPaymentError(null);
       setProcessing(false);
     }

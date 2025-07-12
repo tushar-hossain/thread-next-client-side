@@ -2,18 +2,30 @@ import React from "react";
 import useAuth from "../../hooks/useAuth";
 import { useLocation, useNavigate } from "react-router";
 import toast from "react-hot-toast";
+import useAxiosSecure from "../../hooks/useAxiosSecure";
 
 const SocialLogin = () => {
   const { setUser, loginWithGoogle } = useAuth();
   const navigate = useNavigate();
   const location = useLocation();
+  const axiosSecure = useAxiosSecure();
 
   const handleGoogleLogin = () => {
     loginWithGoogle()
-      .then((result) => {
+      .then(async (result) => {
         setUser(result.user);
-        toast.success("Login successful");
-        navigate(location.state || "/");
+        const usersInfo = {
+          name: result?.user?.displayName,
+          email: result?.user?.email,
+          image: result?.user?.photoURL,
+        };
+
+        const userRes = await axiosSecure.post(`/users`, usersInfo);
+
+        if (userRes.data.insertedId) {
+          toast.success("Login successful");
+          navigate(location.state || "/");
+        }
       })
       .catch(() => toast.error("Login failed"));
   };

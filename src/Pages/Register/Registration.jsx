@@ -7,12 +7,14 @@ import { useForm } from "react-hook-form";
 import axios from "axios";
 import useAuth from "../../hooks/useAuth";
 import toast from "react-hot-toast";
+import useAxiosSecure from "../../hooks/useAxiosSecure";
 
 const Registration = () => {
   const [eye, setEye] = useState(false);
   const { setUser, createUser, updateUser } = useAuth();
   const navigate = useNavigate();
   const location = useLocation();
+  const axiosSecure = useAxiosSecure();
   // react form hook
   const {
     register,
@@ -34,7 +36,20 @@ const Registration = () => {
 
     // create user
     createUser(userInfo.email, userInfo.password)
-      .then((result) => {
+      .then(async (result) => {
+        // backend post user info
+        const usersInfo = {
+          name: data.name,
+          email: data.email,
+          image: res.data.data.url,
+        };
+
+        const userRes = await axiosSecure.post(`/users`, usersInfo);
+
+        if (userRes.data.insertedId) {
+          toast.success("Registration successful");
+        }
+
         // update profile in the firebase
         const userProfile = {
           displayName: userInfo.name,
@@ -43,7 +58,6 @@ const Registration = () => {
         updateUser(userProfile)
           .then(() => {
             setUser(result.user);
-            toast.success("Registration successful");
             navigate(location.state || "/");
           })
           .catch(() => {});
