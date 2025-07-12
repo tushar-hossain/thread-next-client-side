@@ -8,6 +8,10 @@ import Announcement from "../Pages/Announcement/Announcement";
 import PostDetails from "../Pages/Home/PostDetails/PostDetails";
 import PrivateRoute from "../Routes/PrivateRoute";
 import Payment from "../Pages/Membership/Payment/Payment";
+import Dashboard from "../Pages/Dashboard/Dashboard";
+import MyProfile from "../Pages/Dashboard/MyProfile/MyProfile";
+import AddPost from "../Pages/Dashboard/AddPost/AddPost";
+import MyPost from "../Pages/Dashboard/MyPost/MyPost";
 
 export const router = createBrowserRouter([
   {
@@ -37,6 +41,40 @@ export const router = createBrowserRouter([
       {
         path: "payment",
         Component: Payment,
+      },
+    ],
+  },
+  {
+    path: "/dashboard",
+    element: (
+      <PrivateRoute>
+        <Dashboard />
+      </PrivateRoute>
+    ),
+    children: [
+      {
+        path: "profile",
+        element: (
+          <PrivateRoute>
+            <MyProfile />
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "add-post",
+        element: (
+          <PrivateRoute>
+            <AddPost />
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "my-posts",
+        element: (
+          <PrivateRoute>
+            <MyPost />
+          </PrivateRoute>
+        ),
       },
     ],
   },
