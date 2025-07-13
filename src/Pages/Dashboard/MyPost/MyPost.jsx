@@ -1,7 +1,100 @@
-import React from 'react'
+import React from "react";
+import useAuth from "../../../hooks/useAuth";
+import useAxiosSecure from "../../../hooks/useAxiosSecure";
+import { useMutation, useQuery } from "@tanstack/react-query";
+import Loading from "../../Shared/Loading";
+import { Link } from "react-router";
+import Swal from "sweetalert2";
+import toast from "react-hot-toast";
 
 const MyPost = () => {
-  return <div>MyPost</div>;
-}
+  const { user } = useAuth();
+  const axiosSecure = useAxiosSecure();
 
-export default MyPost
+  const {
+    data: myPosts,
+    isLoading,
+    refetch,
+  } = useQuery({
+    queryKey: ["myPosts", user?.email],
+    enabled: !!user?.email,
+    queryFn: async () => {
+      const { data } = await axiosSecure.get(`/all-posts?email=${user.email}`);
+      return data;
+    },
+  });
+
+  const deleteMutation = useMutation({
+    mutationFn: async (postId) => {
+      const res = await axiosSecure.delete(`/posts/${postId}`);
+      return res.data;
+    },
+    onSuccess: () => {
+      toast.success("Post deleted successful.");
+      refetch();
+    },
+  });
+
+  const handleDelete = (id) => {
+    Swal.fire({
+      title: "Are you sure you want to delete this post?",
+      showDenyButton: true,
+      showCancelButton: true,
+      confirmButtonText: "Delete",
+      denyButtonText: `Don't delete`,
+    }).then((result) => {
+      /* Read more about isConfirmed, isDenied below */
+      if (result.isConfirmed) {
+        deleteMutation.mutate(id);
+
+        Swal.fire("Delete!", "", "success");
+      } else if (result.isDenied) {
+        Swal.fire("Changes are not delete", "", "info");
+      }
+    });
+  };
+
+  if (isLoading) return <Loading />;
+
+  return (
+    <div className="overflow-x-auto">
+      <table className="table table-zebra w-full">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Title</th>
+            <th>Votes</th>
+            <th>Comment</th>
+            <th>Delete</th>
+          </tr>
+        </thead>
+        <tbody>
+          {myPosts?.map((post, index) => (
+            <tr key={post._id}>
+              <td>{index + 1}</td>
+              <td>{post.title}</td>
+              <td>{(post.upVote || 0) - (post.downVote || 0)}</td>
+              <td>
+                <Link to={`/comments/${post._id}`}>
+                  <button className="btn btn-sm btn-outline">
+                    View Comments
+                  </button>
+                </Link>
+              </td>
+              <td>
+                <button
+                  onClick={() => handleDelete(post._id)}
+                  className="btn btn-sm btn-error"
+                >
+                  Delete
+                </button>
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+  );
+};
+
+export default MyPost;

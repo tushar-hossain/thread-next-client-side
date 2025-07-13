@@ -53,11 +53,14 @@ const PostDetails = () => {
     mutationFn: async () => {
       const res = await axiosSecure.post(`/comments`, {
         postId: id,
+        postTitle: posts.title,
         name: user?.displayName,
         photo: user?.photoURL,
         email: user?.email,
         text: commentText,
+        createdAt: new Date().toISOString(),
       });
+
       if (res?.data?.message) {
         toast.error(res?.data?.message);
       } else {
