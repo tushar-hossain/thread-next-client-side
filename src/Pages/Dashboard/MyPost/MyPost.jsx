@@ -75,7 +75,7 @@ const MyPost = () => {
               <td>{post.title}</td>
               <td>{(post.upVote || 0) - (post.downVote || 0)}</td>
               <td>
-                <Link to={`/comments/${post._id}`}>
+                <Link to={`/dashboard/commentsPage/${post._id}`}>
                   <button className="btn btn-sm btn-outline">
                     View Comments
                   </button>
