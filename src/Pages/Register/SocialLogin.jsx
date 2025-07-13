@@ -19,14 +19,9 @@ const SocialLogin = () => {
           image: result?.user?.photoURL,
         };
 
-        const userRes = await axios.post(
-          `http://localhost:3000/users`,
-          usersInfo
-        );
+        await axios.post(`http://localhost:3000/users`, usersInfo);
 
-        if (userRes.data.insertedId) {
-          toast.success("Login successful");
-        }
+        toast.success("Login successful");
         navigate(location.state || "/");
       })
       .catch(() => toast.error("Login failed"));
