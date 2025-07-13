@@ -12,20 +12,23 @@ const useAxiosSecure = () => {
 
   axiosSecure.interceptors.request.use(
     (config) => {
-      config.headers.Authorization = `Bearer ${user?.accessToken}`;
+      if (!user?.accessToken) {
+        return config;
+      }
+      config.headers.authorization = `Bearer ${user?.accessToken}`;
       return config;
     },
     (error) => Promise.reject(error)
   );
 
   axiosSecure.interceptors.response.use(
-    (response) => {
-      return response;
+    (res) => {
+      return res;
     },
     (error) => {
       const status = error.status;
       if (status === 403) {
-        return navigate("/joinUs");
+        return navigate("/");
       } else if (status === 401) {
         logOut()
           .then(() => {

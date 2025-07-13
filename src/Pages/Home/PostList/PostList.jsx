@@ -57,32 +57,30 @@ const PostList = () => {
       </div>
 
       {/* showing posts here */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4">
         {posts.map((post) => (
           <div key={post._id} className=" card bg-base-300 shadow-md p-5">
             <div className=" mb-3">
               <img
-                className="w-35 h-35 mx-auto rounded-lg mb-3"
+                className="w-25 h-25 mx-auto rounded-lg mb-3"
                 src={post.authorImage}
                 alt="Author"
               />
               <div>
-                <h3 className="font-semibold text-xl text-center">
-                  {post.title}
-                </h3>
+                <h3 className="font-semibold text-center">{post.title}</h3>
                 <p className="text-sm text-gray-500 text-center">
                   {post.authorName}
                 </p>
               </div>
             </div>
             {/* tags */}
-            <div className="flex flex-wrap gap-2 mb-2">
+            {/* <div className="flex flex-wrap gap-2 mb-2">
               {post.tags.map((tag, index) => (
                 <span key={index} className="badge badge-outline badge-primary">
                   {tag}
                 </span>
               ))}
-            </div>
+            </div> */}
 
             <div className="text-sm text-gray-500 mb-2">
               {new Date(post.createdAt).toLocaleString()}

@@ -6,7 +6,7 @@ const Announcement = () => {
 
   if (isLoading || announcements.length === 0) {
     return (
-      <h2 className="font-poppins text-center font-semibold">
+      <h2 className="font-poppins text-center font-semibold my-10">
         No announcement found!
       </h2>
     );

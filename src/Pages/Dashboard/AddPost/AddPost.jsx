@@ -76,8 +76,6 @@ const AddPost = () => {
     }
   };
 
-  if (isLoading) return <Loading />;
-
   // 5 posts if not gold
   if (profile?.membership !== "gold" && postCount >= 5) {
     return (
@@ -92,6 +90,8 @@ const AddPost = () => {
       </div>
     );
   }
+
+  if (isLoading) return <Loading />;
 
   return (
     <div>
