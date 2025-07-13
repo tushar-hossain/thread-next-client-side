@@ -13,7 +13,7 @@ const MyProfile = () => {
     queryKey: ["userProfile", user?.email],
     enabled: !!user?.email,
     queryFn: async () => {
-      const { data } = await axiosSecure.get(`/users?email=${user.email}`);
+      const { data } = await axiosSecure.get(`/users?email=${user?.email}`);
       return data;
     },
   });
@@ -22,13 +22,12 @@ const MyProfile = () => {
     queryKey: ["recentPosts", user?.email],
     enabled: !!user?.email,
     queryFn: async () => {
-      const res = await axiosSecure.get(`/posts/recent?email=${user.email}`);
+      const res = await axiosSecure.get(`/posts/recent?email=${user?.email}`);
       return res.data;
     },
   });
 
   if (isLoading) return <Loading />;
-  console.log(profile);
 
   return (
     <div>
@@ -42,7 +41,7 @@ const MyProfile = () => {
           <h2 className="text-xl font-bold font-poppins">{profile?.name}</h2>
           <p className="text-gray-500">{profile.email}</p>
           {/* Badge */}
-          {profile.badge === "gold" && (
+          {profile?.badge === "gold" && (
             <div className="mt-2 badge badge-warning text-white flex items-center gap-1 mx-auto">
               <FaMedal size={20} />
               <span className="text-sm text-gray-500">Gold Badge</span>
@@ -60,12 +59,12 @@ const MyProfile = () => {
       <div>
         <h3 className="text-lg font-semibold mb-2">My Recent Posts</h3>
         <ul className="space-y-3">
-          {recentPosts.map((post) => (
-            <li key={post._id} className="p-4 border rounded">
-              <h4 className="font-semibold">{post.title}</h4>
-              <p className="text-sm text-gray-500">{post.tags?.join(", ")}</p>
+          {recentPosts?.map((post) => (
+            <li key={post?._id} className="p-4 border rounded">
+              <h4 className="font-semibold">{post?.title}</h4>
+              <p className="text-sm text-gray-500">{post?.tags?.join(", ")}</p>
               <p className="text-xs text-gray-400">
-                {new Date(post.createdAt).toLocaleString()}
+                {new Date(post?.createdAt).toLocaleString()}
               </p>
             </li>
           ))}
