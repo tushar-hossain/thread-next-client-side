@@ -15,6 +15,7 @@ import MyPost from "../Pages/Dashboard/MyPost/MyPost";
 import CommentsPage from "../Pages/Dashboard/CommentsPage/CommentsPage";
 import AdminRoute from "../Routes/AdminRoute";
 import AdminProfile from "../Pages/Dashboard/Admin/AdminProfile/AdminProfile";
+import ManageUsers from "../Pages/Dashboard/Admin/ManageUsers/ManageUsers";
 
 export const router = createBrowserRouter([
   {
@@ -95,6 +96,14 @@ export const router = createBrowserRouter([
         element: (
           <AdminRoute>
             <AdminProfile />
+          </AdminRoute>
+        ),
+      },
+      {
+        path: "manage-users",
+        element: (
+          <AdminRoute>
+            <ManageUsers />
           </AdminRoute>
         ),
       },
