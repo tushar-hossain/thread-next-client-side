@@ -1,7 +1,7 @@
 import React from "react";
 import DashboardNavbar from "../DashboardNavbar/DashboardNavbar";
 import { NavLink } from "react-router";
-import { FaUser, FaPlus, FaClipboardList } from "react-icons/fa";
+import { FaUser, FaPlus, FaClipboardList, FaHome } from "react-icons/fa";
 import useUserRole from "../../../hooks/useUserRole";
 import { FaUserCog, FaFlag, FaBullhorn } from "react-icons/fa";
 import { MdAdminPanelSettings } from "react-icons/md";
@@ -31,6 +31,15 @@ const Sidebar = () => {
 
           {role === "user" && !authLoading && (
             <>
+              <li>
+                <NavLink
+                  to="/"
+                  className="btn btn-ghost w-full justify-start gap-2"
+                >
+                  <FaHome />
+                  Home
+                </NavLink>
+              </li>
               <li>
                 <NavLink
                   to="/dashboard/profile"
@@ -64,6 +73,16 @@ const Sidebar = () => {
           {/* admin role */}
           {role === "admin" && !authLoading && (
             <>
+              <li>
+                <NavLink
+                  to="/dashboard"
+                  className="btn btn-ghost w-full justify-start gap-2"
+                >
+                  <FaHome />
+                  Home
+                </NavLink>
+              </li>
+
               <li>
                 <NavLink
                   to="/dashboard/admin-profile"

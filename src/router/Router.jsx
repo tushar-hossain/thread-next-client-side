@@ -13,6 +13,8 @@ import MyProfile from "../Pages/Dashboard/MyProfile/MyProfile";
 import AddPost from "../Pages/Dashboard/AddPost/AddPost";
 import MyPost from "../Pages/Dashboard/MyPost/MyPost";
 import CommentsPage from "../Pages/Dashboard/CommentsPage/CommentsPage";
+import AdminRoute from "../Routes/AdminRoute";
+import AdminProfile from "../Pages/Dashboard/Admin/AdminProfile/AdminProfile";
 
 export const router = createBrowserRouter([
   {
@@ -84,6 +86,16 @@ export const router = createBrowserRouter([
           <PrivateRoute>
             <CommentsPage />
           </PrivateRoute>
+        ),
+      },
+
+      // Admin routes
+      {
+        path: "admin-profile",
+        element: (
+          <AdminRoute>
+            <AdminProfile />
+          </AdminRoute>
         ),
       },
     ],
