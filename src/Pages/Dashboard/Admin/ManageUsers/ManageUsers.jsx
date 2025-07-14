@@ -1,6 +1,24 @@
-import React from "react";
+import { useQuery } from "@tanstack/react-query";
+import React, { useState } from "react";
+import useAxiosSecure from "../../../../hooks/useAxiosSecure";
+import Loading from "../../../Shared/Loading";
 
 const ManageUsers = () => {
+  const [searchName, setSearchName] = useState("");
+  const axiosSecure = useAxiosSecure();
+
+  const { data: users = [], isLoading } = useQuery({
+    queryKey: ["users", searchName],
+    queryFn: async () => {
+      const { data } = await axiosSecure.get(`/users?name=${searchName}`);
+      return data;
+    },
+  });
+
+  console.log(users);
+
+  if (isLoading) return <Loading />;
+
   return (
     <div>
       <div>
@@ -9,13 +27,51 @@ const ManageUsers = () => {
         <div className="text-center">
           <input
             type="text"
-            value={""}
-            onChange={() => {}}
+            value={searchName}
+            onChange={(e) => setSearchName(e.target.value)}
             placeholder="Search by users name"
             className="input input-bordered mb-4 w-full max-w-xs"
           />
         </div>
       </div>
+
+      <div className="overflow-x-auto"></div>
+      <table className="table w-full">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Make Admin</th>
+            <th>Subscription</th>
+          </tr>
+        </thead>
+        <tbody>
+          {users.map((user, index) => (
+            <tr key={user._id}>
+              <td>{index + 1}</td>
+              <td>{user.name}</td>
+              <td>{user.email}</td>
+              <td>
+                {user.role === "admin" ? (
+                  <span className="badge badge-success">Admin</span>
+                ) : (
+                  <button onClick={() => {}} className="btn btn-sm btn-primary">
+                    Make Admin
+                  </button>
+                )}
+              </td>
+              <td>
+                {user.membership === "gold" ? (
+                  <span className="badge badge-warning">Gold</span>
+                ) : (
+                  <span className="badge">Free</span>
+                )}
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
     </div>
   );
 };
