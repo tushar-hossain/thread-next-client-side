@@ -1,17 +1,33 @@
-import { useQuery } from "@tanstack/react-query";
+import { useMutation, useQuery } from "@tanstack/react-query";
 import React, { useState } from "react";
 import useAxiosSecure from "../../../../hooks/useAxiosSecure";
 import Loading from "../../../Shared/Loading";
+import toast from "react-hot-toast";
 
 const ManageUsers = () => {
   const [searchName, setSearchName] = useState("");
   const axiosSecure = useAxiosSecure();
 
-  const { data: users = [], isLoading } = useQuery({
+  const {
+    data: users = [],
+    isLoading,
+    refetch,
+  } = useQuery({
     queryKey: ["users", searchName],
     queryFn: async () => {
       const { data } = await axiosSecure.get(`/users?name=${searchName}`);
       return data;
+    },
+  });
+
+  const makeAdminMutation = useMutation({
+    mutationFn: async (userId) => {
+      const { data } = await axiosSecure.patch(`/users/admin/${userId}`);
+      return data;
+    },
+    onSuccess: () => {
+      toast.success("User made admin successfully");
+      refetch();
     },
   });
 
@@ -56,7 +72,10 @@ const ManageUsers = () => {
                 {user.role === "admin" ? (
                   <span className="badge badge-success">Admin</span>
                 ) : (
-                  <button onClick={() => {}} className="btn btn-sm btn-primary">
+                  <button
+                    onClick={() => makeAdminMutation.mutate(user._id)}
+                    className="btn btn-sm btn-primary"
+                  >
                     Make Admin
                   </button>
                 )}
