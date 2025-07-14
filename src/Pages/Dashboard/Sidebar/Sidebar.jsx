@@ -115,7 +115,7 @@ const Sidebar = () => {
 
               <li>
                 <NavLink
-                  to="/dashboard/announcements"
+                  to="/dashboard/admin-announcement"
                   className="btn btn-ghost w-full justify-start gap-2"
                 >
                   <FaBullhorn />

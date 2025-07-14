@@ -16,6 +16,7 @@ import CommentsPage from "../Pages/Dashboard/CommentsPage/CommentsPage";
 import AdminRoute from "../Routes/AdminRoute";
 import AdminProfile from "../Pages/Dashboard/Admin/AdminProfile/AdminProfile";
 import ManageUsers from "../Pages/Dashboard/Admin/ManageUsers/ManageUsers";
+import AdminAnnouncement from "../Pages/Dashboard/Admin/AdminAnnouncement/AdminAnnouncement";
 
 export const router = createBrowserRouter([
   {
@@ -107,6 +108,14 @@ export const router = createBrowserRouter([
           </AdminRoute>
         ),
       },
+      {
+        path: "admin-announcement",
+        element: (
+          <AdminRoute>
+            <AdminAnnouncement />
+          </AdminRoute>
+        ),
+      }
     ],
   },
 ]);

@@ -31,8 +31,6 @@ const ManageUsers = () => {
     },
   });
 
-  console.log(users);
-
   if (isLoading) return <Loading />;
 
   return (
