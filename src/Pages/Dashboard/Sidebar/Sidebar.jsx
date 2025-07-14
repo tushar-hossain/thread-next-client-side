@@ -105,7 +105,7 @@ const Sidebar = () => {
 
               <li>
                 <NavLink
-                  to="/dashboard/reported-comments"
+                  to="/dashboard/adminReportedComments"
                   className="btn btn-ghost w-full justify-start gap-2"
                 >
                   <FaFlag />
