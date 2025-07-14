@@ -75,17 +75,7 @@ const Sidebar = () => {
             <>
               <li>
                 <NavLink
-                  to="/dashboard"
-                  className="btn btn-ghost w-full justify-start gap-2"
-                >
-                  <FaHome />
-                  Home
-                </NavLink>
-              </li>
-
-              <li>
-                <NavLink
-                  to="/dashboard/admin-profile"
+                  to="/dashboard/profile"
                   className="btn btn-ghost w-full justify-start gap-2"
                 >
                   <MdAdminPanelSettings />

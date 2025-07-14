@@ -25,6 +25,7 @@
     "react-router": "^7.6.3",
     "react-select": "^5.10.2",
     "react-share": "^5.2.2",
+    "recharts": "^3.1.0",
     "sweetalert2": "^11.22.2",
     "tailwindcss": "^4.1.11"
   },

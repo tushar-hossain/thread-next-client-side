@@ -5,10 +5,12 @@ import { Link, NavLink } from "react-router";
 import useAuth from "../../hooks/useAuth";
 import toast from "react-hot-toast";
 import useAnnouncement from "../../hooks/useAnnouncement";
+import useUserRole from "../../hooks/useUserRole";
 
 const Navbar = () => {
   const { user, logOut } = useAuth();
   const { announcements } = useAnnouncement();
+  const { role } = useUserRole();
 
   // logout user
   const handleLogout = () => {
@@ -97,7 +99,15 @@ const Navbar = () => {
                   <p className="font-bold">{user?.displayName}</p>
                 </li>
                 <li>
-                  <Link to="/dashboard">Dashboard</Link>
+                  <Link
+                    to={
+                      role === "admin"
+                        ? "/dashboard/admin-profile"
+                        : "dashboard/profile"
+                    }
+                  >
+                    Dashboard
+                  </Link>
                 </li>
                 <li>
                   <a onClick={handleLogout}>Logout</a>

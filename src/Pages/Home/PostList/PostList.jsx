@@ -8,7 +8,7 @@ const PostList = () => {
   const axiosSecure = useAxiosSecure();
   const [page, setPage] = useState(1);
   const [sortBy, setSortBy] = useState("newest");
-  const limit = 5;
+  const limit = 10;
 
   const { data, isLoading, isError } = useQuery({
     queryKey: ["posts", page, sortBy],
