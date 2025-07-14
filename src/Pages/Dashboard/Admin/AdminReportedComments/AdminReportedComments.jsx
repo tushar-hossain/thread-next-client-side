@@ -30,6 +30,17 @@ const AdminReportedComments = () => {
     },
   });
 
+  const dismissReport = useMutation({
+    mutationFn: async (reportId) => {
+      const { data } = await axiosSecure.delete(`/reports/${reportId}`);
+      return data;
+    },
+    onSuccess: () => {
+      toast.success("Report dismissed successfully");
+      refetch();
+    },
+  });
+
   if (isLoading) return <Loading />;
 
   return (
@@ -67,7 +78,7 @@ const AdminReportedComments = () => {
                       Delete Comment
                     </button>
                     <button
-                      onClick={() => {}}
+                      onClick={() => dismissReport.mutate(report._id)}
                       className="btn btn-sm btn-outline"
                     >
                       Dismiss Report
