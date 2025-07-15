@@ -49,6 +49,10 @@ const AdminAnnouncement = () => {
   return (
     <div>
       <h2 className="text-2xl font-bold mb-4">Make Announcement</h2>
+      <p className="text-gray-600 mt-1 mb-6">
+        Share important updates, news, or community guidelines with all users.
+        Your announcements will be visible on the homepage and notify members.
+      </p>
 
       <form
         onSubmit={handleSubmit(onsubmit)}

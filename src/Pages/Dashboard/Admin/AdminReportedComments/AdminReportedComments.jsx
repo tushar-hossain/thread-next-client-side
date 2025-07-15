@@ -49,6 +49,10 @@ const AdminReportedComments = () => {
         <h2 className="text-xl font-semibold mb-4 font-poppins">
           Reported Comments
         </h2>
+        <p className="text-gray-600 mt-1 mb-6">
+          Review all comments flagged by users for inappropriate content. Take
+          necessary actions to maintain a healthy community environment.
+        </p>
 
         <div className="overflow-x-auto">
           <table className="table w-full bg-base-200">

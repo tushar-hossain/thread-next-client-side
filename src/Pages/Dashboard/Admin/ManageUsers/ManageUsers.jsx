@@ -37,6 +37,10 @@ const ManageUsers = () => {
     <div>
       <div>
         <h2 className="text-xl font-bold font-poppins mb-4">Manage Users</h2>
+        <p className="text-gray-600 mt-1 mb-6">
+          View all registered users, assign admin roles, and monitor membership
+          status. Use the search to find users quickly.
+        </p>
 
         <div className="text-center">
           <input
