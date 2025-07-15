@@ -19,7 +19,7 @@ const SocialLogin = () => {
           image: result?.user?.photoURL,
         };
 
-        await axios.post(`http://localhost:3000/users`, usersInfo);
+        await axios.post(`${import.meta.env.VITE_SERVER_URL}/users`, usersInfo);
 
         toast.success("Login successful");
         navigate(location.state || "/");

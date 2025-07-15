@@ -4,7 +4,6 @@ import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import Loading from "../../Shared/Loading";
 import { AiFillLike } from "react-icons/ai";
 import { BiSolidDislike } from "react-icons/bi";
-import { FaComment } from "react-icons/fa";
 import { Link } from "react-router";
 import AllTags from "../AllTags/AllTags";
 
@@ -34,8 +33,6 @@ const BannerSection = () => {
       searchPosts(searchItem);
     }
   };
-
-  console.log(searchResult);
 
   return (
     <div className="bg-primary py-8 px-4 md:px-12">

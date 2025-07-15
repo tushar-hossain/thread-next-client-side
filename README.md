@@ -128,7 +128,7 @@ VITE_FIREBASE_AUTH_DOMAIN=your_auth_domain
 
 <!-- ## 🧪 Run Locally
 
-```bash
+```
 git clone https://github.com/your-username/forum-frontend.git
 cd forum-frontend
 npm install

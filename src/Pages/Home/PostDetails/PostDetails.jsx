@@ -150,14 +150,14 @@ const PostDetails = () => {
           {/*  */}
           <div className="flex gap-3">
             <FacebookShareButton
-              url={`http://localhost:5173/postDetails/${id}`}
+              url={`${import.meta.env.VITE_SERVER_URL}/postDetails/${id}`}
               quote={posts?.title}
             >
               <FacebookIcon size={32} round />
             </FacebookShareButton>
 
             <WhatsappShareButton
-              url={`http://localhost:5173/postDetails/${id}`}
+              url={`${import.meta.env.VITE_SERVER_URL}/postDetails/${id}`}
               quote={posts?.title}
             >
               <WhatsappIcon size={32} round />

@@ -43,7 +43,7 @@ const Registration = () => {
         };
 
         const userRes = await axios.post(
-          `http://localhost:3000/users`,
+          `${import.meta.env.VITE_SERVER_URL}/users`,
           usersInfo
         );
 
