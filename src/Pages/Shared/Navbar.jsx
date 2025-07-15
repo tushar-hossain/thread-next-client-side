@@ -93,9 +93,7 @@ const Navbar = () => {
                 tabIndex={0}
                 className="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow text-black"
               >
-                <li>
-                  <p className="font-bold">{user?.displayName}</p>
-                </li>
+                <p className="font-bold ml-2">{user?.displayName}</p>
                 <li>
                   <Link
                     to={

@@ -64,12 +64,12 @@ const PostList = () => {
       </div>
 
       {/* showing posts here */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-2">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-2">
         {posts.map((post) => (
           <div key={post._id} className=" card bg-white shadow-md p-5">
             <div className="mb-3">
               <img
-                className="object-cover object-center w-full rounded-t-md h-30 mb-2"
+                className="object-cover object-center w-full rounded-t-md h-35 mb-2"
                 src={post.authorImage}
                 alt="Author"
               />

@@ -8,6 +8,12 @@ import { BiSolidDislike } from "react-icons/bi";
 import toast from "react-hot-toast";
 import useAuth from "../../../hooks/useAuth";
 import { FaCommentAlt } from "react-icons/fa";
+import {
+  FacebookShareButton,
+  FacebookIcon,
+  WhatsappShareButton,
+  WhatsappIcon,
+} from "react-share";
 
 const PostDetails = () => {
   const { user } = useAuth();
@@ -114,28 +120,49 @@ const PostDetails = () => {
         </div>
         <p className="my-4 text-base text-gray-700">{posts?.description}</p>
 
-        <div className="flex gap-3 items-center">
-          <button
-            className="flex items-center gap-2 font-semibold"
-            onClick={() => voteMutation.mutate("up")}
-          >
-            <AiFillLike className="text-blue-500 cursor-pointer" size={28} />{" "}
-            {posts?.upVote}
-          </button>
-          <button
-            className="flex items-center gap-2 font-semibold"
-            onClick={() => voteMutation.mutate("down")}
-          >
-            <BiSolidDislike
-              className="text-blue-500 cursor-pointer"
-              size={28}
-            />{" "}
-            {posts?.downVote}
-          </button>
+        <div className="flex gap-3 items-center justify-between">
+          <div className="flex gap-3 items-center">
+            <button
+              className="flex items-center gap-2 font-semibold"
+              onClick={() => voteMutation.mutate("up")}
+            >
+              <AiFillLike className="text-blue-500 cursor-pointer" size={28} />{" "}
+              {posts?.upVote}
+            </button>
+            /
+            <button
+              className="flex items-center gap-2 font-semibold"
+              onClick={() => voteMutation.mutate("down")}
+            >
+              {posts?.downVote}
+              <BiSolidDislike
+                className="text-blue-500 cursor-pointer"
+                size={28}
+              />{" "}
+            </button>
+            <button onClick={() => setComment(!comment)}>
+              <FaCommentAlt
+                className="text-blue-500 cursor-pointer"
+                size={28}
+              />
+            </button>
+          </div>
+          {/*  */}
+          <div className="flex gap-3">
+            <FacebookShareButton
+              url={`http://localhost:5173/postDetails/${id}`}
+              quote={posts?.title}
+            >
+              <FacebookIcon size={32} round />
+            </FacebookShareButton>
 
-          <button onClick={() => setComment(!comment)}>
-            <FaCommentAlt className="text-blue-500 cursor-pointer" size={28} />
-          </button>
+            <WhatsappShareButton
+              url={`http://localhost:5173/postDetails/${id}`}
+              quote={posts?.title}
+            >
+              <WhatsappIcon size={32} round />
+            </WhatsappShareButton>
+          </div>
         </div>
 
         {/* comment */}
