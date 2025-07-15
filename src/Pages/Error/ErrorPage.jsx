@@ -2,8 +2,12 @@ import React from "react";
 import { useRouteError } from "react-router";
 import errorAnimation from "../../assets/lottieFile/error.json";
 import Lottie from "lottie-react";
+import { Helmet } from "react-helmet-async";
 
 const ErrorPage = () => {
+  <Helmet>
+    <title>Error</title>
+  </Helmet>;
   const error = useRouteError();
   return (
     <div>

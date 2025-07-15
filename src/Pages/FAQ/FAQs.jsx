@@ -1,6 +1,10 @@
 import React from "react";
+import { Helmet } from "react-helmet-async";
 
 const FAQs = () => {
+    <Helmet>
+      <title>FAQs</title>
+    </Helmet>;
   const faqs = [
     {
       question: "What is this forum platform about?",

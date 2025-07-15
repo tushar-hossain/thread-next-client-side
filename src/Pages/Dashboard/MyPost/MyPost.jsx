@@ -6,8 +6,12 @@ import Loading from "../../Shared/Loading";
 import { Link } from "react-router";
 import Swal from "sweetalert2";
 import toast from "react-hot-toast";
+import { Helmet } from "react-helmet-async";
 
 const MyPost = () => {
+  <Helmet>
+    <title>My Post</title>
+  </Helmet>;
   const { user } = useAuth();
   const axiosSecure = useAxiosSecure();
 

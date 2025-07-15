@@ -13,8 +13,12 @@ import {
 } from "recharts";
 import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
+import { Helmet } from "react-helmet-async";
 
 const AdminProfile = () => {
+  <Helmet>
+    <title>Admin Profile</title>
+  </Helmet>;
   const { user } = useAuth();
   const axiosSecure = useAxiosSecure();
 

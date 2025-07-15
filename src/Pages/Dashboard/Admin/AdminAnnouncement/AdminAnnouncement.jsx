@@ -5,8 +5,12 @@ import toast from "react-hot-toast";
 import useAxiosSecure from "../../../../hooks/useAxiosSecure";
 import { useMutation } from "@tanstack/react-query";
 import useUserRole from "../../../../hooks/useUserRole";
+import { Helmet } from "react-helmet-async";
 
 const AdminAnnouncement = () => {
+  <Helmet>
+    <title>Admin Announcement</title>
+  </Helmet>;
   const { user } = useAuth();
   const axiosSecure = useAxiosSecure();
   const { role } = useUserRole();

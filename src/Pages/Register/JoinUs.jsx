@@ -6,8 +6,12 @@ import SocialLogin from "./SocialLogin";
 import { useForm } from "react-hook-form";
 import useAuth from "../../hooks/useAuth";
 import toast from "react-hot-toast";
+import { Helmet } from "react-helmet-async";
 
 const JoinUs = () => {
+  <Helmet>
+    <title>Join Us</title>
+  </Helmet>;
   const [eye, setEye] = useState(false);
   const { setUser, loginUser } = useAuth();
   const navigate = useNavigate();

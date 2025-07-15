@@ -7,8 +7,12 @@ import { useForm } from "react-hook-form";
 import axios from "axios";
 import useAuth from "../../hooks/useAuth";
 import toast from "react-hot-toast";
+import { Helmet } from "react-helmet-async";
 
 const Registration = () => {
+  <Helmet>
+    <title>Register</title>
+  </Helmet>;
   const [eye, setEye] = useState(false);
   const { setUser, createUser, updateUser } = useAuth();
   const navigate = useNavigate();

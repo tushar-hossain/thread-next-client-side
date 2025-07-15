@@ -3,8 +3,12 @@ import useAxiosSecure from "../../../../hooks/useAxiosSecure";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import Loading from "../../../Shared/Loading";
 import toast from "react-hot-toast";
+import { Helmet } from "react-helmet-async";
 
 const AdminReportedComments = () => {
+  <Helmet>
+    <title>Admin Reported Comments</title>
+  </Helmet>;
   const axiosSecure = useAxiosSecure();
 
   const {

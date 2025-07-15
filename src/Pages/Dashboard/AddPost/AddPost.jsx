@@ -7,8 +7,12 @@ import toast from "react-hot-toast";
 import { useQuery } from "@tanstack/react-query";
 import Loading from "../../Shared/Loading";
 import { useNavigate } from "react-router";
+import { Helmet } from "react-helmet-async";
 
 const AddPost = () => {
+  <Helmet>
+    <title>Add Post</title>
+  </Helmet>;
   const { user } = useAuth();
   const [selectedTags, setSelectedTags] = useState([]);
   const axiosSecure = useAxiosSecure();

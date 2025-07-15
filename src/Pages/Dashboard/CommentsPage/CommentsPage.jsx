@@ -6,8 +6,12 @@ import Loading from "../../Shared/Loading";
 import toast from "react-hot-toast";
 import "react-responsive-modal/styles.css";
 import { Modal } from "react-responsive-modal";
+import { Helmet } from "react-helmet-async";
 
 const CommentsPage = () => {
+    <Helmet>
+      <title>Comments Page</title>
+    </Helmet>;
   const { id: postId } = useParams();
   const axiosSecure = useAxiosSecure();
   const [selectedFeedback, setSelectedFeedback] = useState({});

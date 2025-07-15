@@ -1,7 +1,12 @@
 import React from "react";
 import useAnnouncement from "../../hooks/useAnnouncement";
+import { Helmet } from "react-helmet-async";
 
 const Announcement = () => {
+  <Helmet>
+    <title>Announcements</title>
+  </Helmet>;
+
   const { announcements, isLoading } = useAnnouncement();
 
   if (isLoading || announcements.length === 0) {

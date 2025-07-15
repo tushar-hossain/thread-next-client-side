@@ -3,8 +3,12 @@ import React, { useState } from "react";
 import useAxiosSecure from "../../../../hooks/useAxiosSecure";
 import Loading from "../../../Shared/Loading";
 import toast from "react-hot-toast";
+import { Helmet } from "react-helmet-async";
 
 const ManageUsers = () => {
+  <Helmet>
+    <title>Manage Users</title>
+  </Helmet>;
   const [searchName, setSearchName] = useState("");
   const axiosSecure = useAxiosSecure();
 
