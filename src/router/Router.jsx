@@ -21,11 +21,13 @@ import AdminReportedComments from "../Pages/Dashboard/Admin/AdminReportedComment
 import FAQs from "../Pages/FAQ/FAQs";
 import PrivacyPolicy from "../Pages/PrivacyPolicy/PrivacyPolicy";
 import TermsOfService from "../Pages/TermsOfService/TermsOfService";
+import ErrorPage from "../Pages/Error/ErrorPage";
 
 export const router = createBrowserRouter([
   {
     path: "/",
     Component: RootLayouts,
+    errorElement: <ErrorPage />,
     children: [
       { index: true, Component: Home },
       {
