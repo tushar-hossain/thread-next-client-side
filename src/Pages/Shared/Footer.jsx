@@ -46,9 +46,7 @@ const Footer = () => {
               <h3 className="tracking-wide uppercase">Company</h3>
               <ul className="space-y-1">
                 <li>
-                  <a rel="noopener noreferrer" href="#">
-                    Privacy
-                  </a>
+                  <NavLink to="privacy">Privacy</NavLink>
                 </li>
                 <li>
                   <a rel="noopener noreferrer" href="#">
