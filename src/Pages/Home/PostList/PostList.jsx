@@ -4,6 +4,7 @@ import { useQuery } from "@tanstack/react-query";
 import Loading from "../../Shared/Loading";
 import { Link } from "react-router";
 import { BiSolidDislike, BiSolidLike } from "react-icons/bi";
+import Pagination from "../../Shared/Pagination";
 
 const PostList = () => {
   const axiosSecure = useAxiosSecure();
@@ -36,6 +37,7 @@ const PostList = () => {
         <h2 className="text-xl md:text-2xl font-bold font-poppins text-primary">
           All Posts
         </h2>
+
         {/* button sort data newest and popular */}
         <div className="flex gap-2">
           <button
@@ -124,7 +126,7 @@ const PostList = () => {
       </div>
 
       {/* pagination */}
-      <div className="flex justify-center mt-8 gap-2">
+      {/* <div className="flex justify-center mt-8 gap-2">
         {Array.from({ length: totalPages }, (_, index) => (
           <button
             onClick={() => setPage(index + 1)}
@@ -136,6 +138,9 @@ const PostList = () => {
             {index + 1}
           </button>
         ))}
+      </div> */}
+      <div className="mt-10 text-center">
+        <Pagination page={page} setPage={setPage} totalPages={totalPages} />
       </div>
     </div>
   );
