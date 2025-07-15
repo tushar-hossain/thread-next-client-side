@@ -51,7 +51,7 @@ const AdminReportedComments = () => {
         </h2>
 
         <div className="overflow-x-auto">
-          <table className="table w-full">
+          <table className="table w-full bg-base-200">
             <thead>
               <tr>
                 <th>#</th>
@@ -73,13 +73,13 @@ const AdminReportedComments = () => {
                       onClick={() =>
                         deleteComment.mutate(report.commentId.commentId)
                       }
-                      className="btn btn-sm btn-error"
+                      className="btn btn-sm btn-error text-white"
                     >
                       Delete Comment
                     </button>
                     <button
                       onClick={() => dismissReport.mutate(report._id)}
-                      className="btn btn-sm btn-outline"
+                      className="btn bg-blue-500 hover:bg-blue-600 text-white transition-all duration-300 text-sm btn-sm"
                     >
                       Dismiss Report
                     </button>

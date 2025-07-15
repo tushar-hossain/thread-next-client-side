@@ -56,16 +56,22 @@ const MyProfile = () => {
         </div>
       </div>
       {/*  */}
-      <div>
-        <h3 className="text-lg font-semibold mb-2">My Recent Posts</h3>
+      <div className="bg-white p-4 rounded-lg shadow-md mt-6">
+        <h3 className="text-lg font-semibold mb-4 font-poppins">
+          My Recent Posts
+        </h3>
         <ul className="space-y-3">
           {recentPosts?.map((post) => (
-            <li key={post?._id} className="p-4 border rounded">
+            <li
+              key={post?._id}
+              className="p-4 bg-gray-100 rounded-md shadow-sm space-y-2"
+            >
               <h4 className="font-semibold">{post?.title}</h4>
               <p className="text-sm text-gray-500">{post?.tags?.join(", ")}</p>
               <p className="text-xs text-gray-400">
                 {new Date(post?.createdAt).toLocaleString()}
               </p>
+              <p>{post.description}</p>
             </li>
           ))}
         </ul>

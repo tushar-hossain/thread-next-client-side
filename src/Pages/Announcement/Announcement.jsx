@@ -13,7 +13,7 @@ const Announcement = () => {
   }
 
   return (
-    <div className="my-10">
+    <div className="w-11/12 mx-auto my-10">
       <h2 className="text-xl md:text-2xl font-semibold font-poppins mb-5">
         Announcements
       </h2>

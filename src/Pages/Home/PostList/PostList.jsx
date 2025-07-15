@@ -3,6 +3,7 @@ import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import { useQuery } from "@tanstack/react-query";
 import Loading from "../../Shared/Loading";
 import { Link } from "react-router";
+import { BiSolidDislike, BiSolidLike } from "react-icons/bi";
 
 const PostList = () => {
   const axiosSecure = useAxiosSecure();
@@ -39,16 +40,20 @@ const PostList = () => {
         <div className="flex gap-2">
           <button
             onClick={() => setSortBy("newest")}
-            className={`btn btn-sm ${
-              sortBy === "newest" ? "btn-primary" : "btn-outline"
+            className={`hover:bg-blue-600 ${
+              sortBy === "newest"
+                ? "btn bg-blue-500 btn-outline text-white"
+                : "btn bg-blue-500 btn-outline"
             } `}
           >
             Newest
           </button>
           <button
             onClick={() => setSortBy("popular")}
-            className={`btn btn-sm ${
-              sortBy === "popular" ? "btn-primary" : "btn-outline"
+            className={`hover:bg-blue-600 ${
+              sortBy === "popular"
+                ? "btn bg-blue-500 btn-outline text-white"
+                : "btn bg-blue-500 btn-outline"
             } `}
           >
             Popular
@@ -57,12 +62,12 @@ const PostList = () => {
       </div>
 
       {/* showing posts here */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-2">
         {posts.map((post) => (
-          <div key={post._id} className=" card bg-base-300 shadow-md p-5">
-            <div className=" mb-3">
+          <div key={post._id} className=" card bg-white shadow-md p-5">
+            <div className="mb-3">
               <img
-                className="w-25 h-25 mx-auto rounded-lg mb-3"
+                className="object-cover object-center w-full rounded-t-md h-30 mb-2"
                 src={post.authorImage}
                 alt="Author"
               />
@@ -74,28 +79,34 @@ const PostList = () => {
               </div>
             </div>
             {/* tags */}
-            {/* <div className="flex flex-wrap gap-2 mb-2">
+            <div className="flex flex-wrap gap-2 mb-2">
               {post.tags.map((tag, index) => (
                 <span key={index} className="badge badge-outline badge-primary">
                   {tag}
                 </span>
               ))}
-            </div> */}
-
-            <div className="text-sm text-gray-500 mb-2">
-              {new Date(post.createdAt).toLocaleString()}
             </div>
 
             {/* vote count  */}
-            <div className="flex justify-between items-center text-sm text-gray-600 flex-1">
+            <div className="flex justify-between items-center text-sm flex-1 mt-3">
               <div className="flex gap-3">
-                <span>{post.commentCount}</span>
-                <span>
-                  {post.upVote} / {post.downVote}
+                <span className="flex items-center gap-1">
+                  <span>
+                    <BiSolidLike className="inline text-blue-500" size={20} />{" "}
+                    {post.upVote}
+                  </span>{" "}
+                  /
+                  <span>
+                    {post.downVote}{" "}
+                    <BiSolidDislike
+                      className="inline text-blue-500"
+                      size={20}
+                    />
+                  </span>
                 </span>
               </div>
-              <span className="font-semibold">
-                Total Votes: {post.upVote - post.downVote}
+              <span className="text-sm">
+                Total Votes {post.upVote - post.downVote}
               </span>
             </div>
 
@@ -103,7 +114,7 @@ const PostList = () => {
             <div className="mt-4 text-right">
               <Link
                 to={`postDetails/${post?._id}`}
-                className="btn btn-sm btn-outline btn-primary w-full"
+                className="btn bg-blue-500 hover:bg-blue-600 text-white w-full"
               >
                 View Details
               </Link>

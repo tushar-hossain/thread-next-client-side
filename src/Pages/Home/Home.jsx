@@ -10,13 +10,8 @@ const Home = () => {
         <BannerSection />
       </section>
 
-      {/* all post */}
-      <section>
-        <AllTags />
-      </section>
-
       {/* post list */}
-      <section>
+      <section className="w-11/12 mx-auto">
         <PostList />
       </section>
     </div>

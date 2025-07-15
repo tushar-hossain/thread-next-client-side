@@ -1,5 +1,5 @@
 import React from "react";
-import logo from "../../assets/image/logo-bird.png";
+import logo from "../../assets/image/logo-tn.png";
 import logoText from "../../assets/image/logo-text.png";
 import { Link, NavLink } from "react-router";
 import useAuth from "../../hooks/useAuth";
@@ -33,7 +33,7 @@ const Navbar = () => {
     </>
   );
   return (
-    <div className="bg-base-300">
+    <div className="bg-primary sticky top-0 z-50 border-b border-gray-300 border-shadow-200">
       <div className="w-11/12 mx-auto flex items-center p-0 py-3 text-white">
         <div className="navbar-start">
           <div className="dropdown">
@@ -74,9 +74,7 @@ const Navbar = () => {
           </Link>
         </div>
         <div className="navbar-center hidden lg:flex">
-          <ul className="menu menu-horizontal px-1 font-roboto text-black">
-            {links}
-          </ul>
+          <ul className="menu menu-horizontal px-1 font-roboto">{links}</ul>
         </div>
         <div className="navbar-end">
           {/* conditional rendering */}
@@ -129,7 +127,7 @@ const Navbar = () => {
               <button disabled={true} className="indicator ml-5 cursor-pointer">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
-                  className="h-5 w-5 text-black"
+                  className="h-5 w-5"
                   fill="none"
                   viewBox="0 0 24 24"
                   stroke="currentColor"

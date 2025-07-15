@@ -34,6 +34,16 @@ const AddPost = () => {
     },
   });
 
+  const { data: tags = [] } = useQuery({
+    queryKey: ["tags"],
+    queryFn: async () => {
+      const res = await axiosSecure.get("/tags");
+      return res.data;
+    },
+  });
+
+  const tagOptions = tags.map((tag) => ({ value: tag.name, label: tag.name }));
+
   const {
     register,
     handleSubmit,
@@ -41,18 +51,18 @@ const AddPost = () => {
     formState: { errors },
   } = useForm();
 
-  const tagOptions = [
-    { value: "javascript", label: "JavaScript" },
-    { value: "mongodb", label: "Mongodb" },
-    { value: "express", label: "Express" },
-    { value: "react", label: "React" },
-    { value: "nodejs", label: "Nodejs" },
-    { value: "css", label: "CSS" },
-    { value: "frontend", label: "Frontend" },
-    { value: "authentication", label: "Authentication" },
-    { value: "typescript", label: "TypeScript" },
-    { value: "backend", label: "Backend" },
-  ];
+  // const tagOptions = [
+  //   { value: "javascript", label: "JavaScript" },
+  //   { value: "mongodb", label: "Mongodb" },
+  //   { value: "express", label: "Express" },
+  //   { value: "react", label: "React" },
+  //   { value: "nodejs", label: "Nodejs" },
+  //   { value: "css", label: "CSS" },
+  //   { value: "frontend", label: "Frontend" },
+  //   { value: "authentication", label: "Authentication" },
+  //   { value: "typescript", label: "TypeScript" },
+  //   { value: "backend", label: "Backend" },
+  // ];
 
   const onsubmit = async (data) => {
     const postData = {
@@ -97,7 +107,7 @@ const AddPost = () => {
     <div>
       <form
         onSubmit={handleSubmit(onsubmit)}
-        className="max-w-xl mx-auto space-y-4 p-4 bg-base-200 rounded"
+        className="max-w-xl mx-auto space-y-4 p-4 bg-white rounded-md shadow-md hover:shadow-[0px_10px_1px_rgba(221,_221,_221,_1),_0_10px_20px_rgba(204,_204,_204,_1)]"
       >
         <div>
           <input
@@ -155,7 +165,10 @@ const AddPost = () => {
           />
         </div>
 
-        <button className="btn btn-primary w-full" type="submit">
+        <button
+          className="btn bg-blue-500 hover:bg-blue-600 text-white transition-all duration-300 text-sm w-full"
+          type="submit"
+        >
           Submit Post
         </button>
       </form>

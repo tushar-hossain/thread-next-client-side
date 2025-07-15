@@ -49,46 +49,47 @@ const ManageUsers = () => {
         </div>
       </div>
 
-      <div className="overflow-x-auto"></div>
-      <table className="table w-full">
-        <thead>
-          <tr>
-            <th>#</th>
-            <th>Name</th>
-            <th>Email</th>
-            <th>Make Admin</th>
-            <th>Subscription</th>
-          </tr>
-        </thead>
-        <tbody>
-          {users.map((user, index) => (
-            <tr key={user._id}>
-              <td>{index + 1}</td>
-              <td>{user.name}</td>
-              <td>{user.email}</td>
-              <td>
-                {user.role === "admin" ? (
-                  <span className="badge badge-success">Admin</span>
-                ) : (
-                  <button
-                    onClick={() => makeAdminMutation.mutate(user._id)}
-                    className="btn btn-sm btn-primary"
-                  >
-                    Make Admin
-                  </button>
-                )}
-              </td>
-              <td>
-                {user.membership === "gold" ? (
-                  <span className="badge badge-warning">Gold</span>
-                ) : (
-                  <span className="badge">Free</span>
-                )}
-              </td>
+      <div className="overflow-x-auto">
+        <table className="table w-full bg-base-200">
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Name</th>
+              <th>Email</th>
+              <th>Make Admin</th>
+              <th>Subscription</th>
             </tr>
-          ))}
-        </tbody>
-      </table>
+          </thead>
+          <tbody>
+            {users.map((user, index) => (
+              <tr key={user._id}>
+                <td>{index + 1}</td>
+                <td>{user.name}</td>
+                <td>{user.email}</td>
+                <td>
+                  {user.role === "admin" ? (
+                    <span className="badge badge-success text-sm">Admin</span>
+                  ) : (
+                    <button
+                      onClick={() => makeAdminMutation.mutate(user._id)}
+                      className="btn bg-blue-500 hover:bg-blue-600 text-white transition-all duration-300 text-sm btn-sm"
+                    >
+                      Make Admin
+                    </button>
+                  )}
+                </td>
+                <td>
+                  {user.membership === "gold" ? (
+                    <span className="badge badge-warning">Gold</span>
+                  ) : (
+                    <span className="badge bg-white">Free</span>
+                  )}
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
     </div>
   );
 };

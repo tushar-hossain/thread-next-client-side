@@ -58,7 +58,7 @@ const MyPost = () => {
 
   return (
     <div className="overflow-x-auto">
-      <table className="table table-zebra w-full">
+      <table className="table table-zebra w-full bg-base-200">
         <thead>
           <tr>
             <th>#</th>
@@ -76,7 +76,7 @@ const MyPost = () => {
               <td>{(post.upVote || 0) - (post.downVote || 0)}</td>
               <td>
                 <Link to={`/dashboard/commentsPage/${post._id}`}>
-                  <button className="btn btn-sm btn-outline">
+                  <button className="btn bg-blue-500 hover:bg-blue-600 text-white transition-all duration-300 text-sm py-2">
                     View Comments
                   </button>
                 </Link>
@@ -84,7 +84,7 @@ const MyPost = () => {
               <td>
                 <button
                   onClick={() => handleDelete(post._id)}
-                  className="btn btn-sm btn-error"
+                  className="btn btn-sm btn-error text-white"
                 >
                   Delete
                 </button>

@@ -48,48 +48,50 @@ const AdminAnnouncement = () => {
 
   return (
     <div>
-      <div>
-        <h2 className="text-2xl font-bold mb-4">Make Announcement</h2>
+      <h2 className="text-2xl font-bold mb-4">Make Announcement</h2>
 
-        <form onSubmit={handleSubmit(onsubmit)}>
-          <div className="form-control mb-4">
-            <label className="label">
-              <span className="label-text">Announcement Title</span>
-            </label>
-            <input
-              type="text"
-              {...register("title", { required: "Title is required" })}
-              placeholder="Enter announcement title"
-              className="input input-bordered w-full"
-            />
-            {errors.title && (
-              <p className="text-red-500 text-sm mt-1">
-                {errors.title.message}
-              </p>
-            )}
-          </div>
-          <div className="form-control mb-4">
-            <label className="label">
-              <span className="label-text">Announcement Description</span>
-            </label>
-            <textarea
-              {...register("description", {
-                required: "Description is required",
-              })}
-              placeholder="Enter announcement Description"
-              className="textarea textarea-bordered w-full resize-none"
-            ></textarea>
-            {errors.description && (
-              <p className="text-red-500 text-sm mt-1">
-                {errors.description.message}
-              </p>
-            )}
-          </div>
-          <button type="submit" className="btn btn-primary w-full">
-            Make Announcement
-          </button>
-        </form>
-      </div>
+      <form
+        onSubmit={handleSubmit(onsubmit)}
+        className="bg-white p-6 rounded shadow-md hover:shadow-[0px_10px_1px_rgba(221,_221,_221,_1),_0_10px_20px_rgba(204,_204,_204,_1)]"
+      >
+        <div className="form-control mb-4">
+          <label className="label">
+            <span className="label-text">Announcement Title</span>
+          </label>
+          <input
+            type="text"
+            {...register("title", { required: "Title is required" })}
+            placeholder="Enter announcement title"
+            className="input input-bordered w-full"
+          />
+          {errors.title && (
+            <p className="text-red-500 text-sm mt-1">{errors.title.message}</p>
+          )}
+        </div>
+        <div className="form-control mb-4">
+          <label className="label">
+            <span className="label-text">Announcement Description</span>
+          </label>
+          <textarea
+            {...register("description", {
+              required: "Description is required",
+            })}
+            placeholder="Enter announcement Description"
+            className="textarea textarea-bordered w-full resize-none"
+          ></textarea>
+          {errors.description && (
+            <p className="text-red-500 text-sm mt-1">
+              {errors.description.message}
+            </p>
+          )}
+        </div>
+        <button
+          type="submit"
+          className="btn bg-blue-500 hover:bg-blue-600 text-white transition-all duration-300 text-sm w-full"
+        >
+          Make Announcement
+        </button>
+      </form>
     </div>
   );
 };

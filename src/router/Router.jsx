@@ -18,6 +18,7 @@ import AdminProfile from "../Pages/Dashboard/Admin/AdminProfile/AdminProfile";
 import ManageUsers from "../Pages/Dashboard/Admin/ManageUsers/ManageUsers";
 import AdminAnnouncement from "../Pages/Dashboard/Admin/AdminAnnouncement/AdminAnnouncement";
 import AdminReportedComments from "../Pages/Dashboard/Admin/AdminReportedComments/AdminReportedComments";
+import FAQs from "../Pages/FAQ/FAQs";
 
 export const router = createBrowserRouter([
   {
@@ -36,6 +37,7 @@ export const router = createBrowserRouter([
       { path: "joinUs", Component: JoinUs },
       { path: "register", Component: Registration },
       { path: "announcement", Component: Announcement },
+      { path: "faqs", Component: FAQs },
       {
         path: "postDetails/:id",
         element: (

@@ -7,7 +7,7 @@ const DashboardNavbar = ({ drawer }) => {
       <input id={drawer} type="checkbox" className="drawer-toggle" />
       <div className="drawer-content flex flex-col">
         {/* Navbar */}
-        <div className="navbar bg-base-300 w-full">
+        <div className="navbar bg-[#364253] w-full lg:hidden">
           <div className="flex-none lg:hidden">
             <label
               htmlFor={drawer}
@@ -28,18 +28,6 @@ const DashboardNavbar = ({ drawer }) => {
                 ></path>
               </svg>
             </label>
-          </div>
-          <div className="mx-2 flex-1 px-2">Navbar Title</div>
-          <div className="hidden flex-none lg:block">
-            <ul className="menu menu-horizontal">
-              {/* Navbar menu content here */}
-              <li>
-                <a>Navbar Item 1</a>
-              </li>
-              <li>
-                <a>Navbar Item 2</a>
-              </li>
-            </ul>
           </div>
         </div>
         {/* Page content here */}

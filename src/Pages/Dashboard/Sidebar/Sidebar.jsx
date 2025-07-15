@@ -5,6 +5,8 @@ import { FaUser, FaPlus, FaClipboardList, FaHome } from "react-icons/fa";
 import useUserRole from "../../../hooks/useUserRole";
 import { FaUserCog, FaFlag, FaBullhorn } from "react-icons/fa";
 import { MdAdminPanelSettings } from "react-icons/md";
+import logo from "../../../../public/logo-tn.png";
+import logoText from "../../../assets/image/logo-text.png";
 
 const Sidebar = () => {
   const { role, authLoading } = useUserRole();
@@ -22,24 +24,24 @@ const Sidebar = () => {
           aria-label="close sidebar"
           className="drawer-overlay"
         ></label>
-        <ul className="menu bg-base-200 text-base-content min-h-full w-60 p-4">
+        <ul className="menu bg-primary text-white min-h-full w-60 p-4">
           {/* Sidebar content here */}
 
-          <li className="mb-10 text-2xl font-semibold font-poppins">
-            <NavLink to="/">Dashboard</NavLink>
-          </li>
+          <div className="mb-10">
+            <NavLink to="/">
+              <div className="flex items-center gap-1 -px-3">
+                <img
+                  className="w-15 h-15 rounded-full hidden md:block"
+                  src={logo}
+                  alt="brand logo"
+                />
+                <img className="w-40" src={logoText} alt="brand text" />
+              </div>
+            </NavLink>
+          </div>
 
           {role === "user" && !authLoading && (
             <>
-              <li>
-                <NavLink
-                  to="/"
-                  className="btn btn-ghost w-full justify-start gap-2"
-                >
-                  <FaHome />
-                  Home
-                </NavLink>
-              </li>
               <li>
                 <NavLink
                   to="/dashboard/profile"
@@ -75,7 +77,7 @@ const Sidebar = () => {
             <>
               <li>
                 <NavLink
-                  to="/dashboard/profile"
+                  to="/dashboard/admin-profile"
                   className="btn btn-ghost w-full justify-start gap-2"
                 >
                   <MdAdminPanelSettings />
