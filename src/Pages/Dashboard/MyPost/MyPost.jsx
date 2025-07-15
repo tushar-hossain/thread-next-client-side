@@ -58,6 +58,13 @@ const MyPost = () => {
 
   return (
     <div className="overflow-x-auto">
+      <h2 className="text-xl md:text-2xl font-bold text-primary mb-6">
+        My Posts
+      </h2>
+      <p className="text-gray-600 mt-1 mb-6">
+        Here you can view and manage all the posts you've shared. View Comments,
+        delete, or track the performance of each post.
+      </p>
       <table className="table table-zebra w-full bg-base-200">
         <thead>
           <tr>

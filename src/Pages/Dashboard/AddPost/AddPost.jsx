@@ -105,6 +105,13 @@ const AddPost = () => {
 
   return (
     <div>
+      <h2 className="text-xl md:text-2xl font-bold text-primary mb-6">
+        Create a New Post
+      </h2>
+      <p className="text-gray-600 mt-1 mb-6">
+        Share your thoughts, ask questions, or start a discussion. Fill out the
+        form below to publish your post.
+      </p>
       <form
         onSubmit={handleSubmit(onsubmit)}
         className="max-w-xl mx-auto space-y-4 p-4 bg-white rounded-md shadow-md hover:shadow-[0px_10px_1px_rgba(221,_221,_221,_1),_0_10px_20px_rgba(204,_204,_204,_1)]"

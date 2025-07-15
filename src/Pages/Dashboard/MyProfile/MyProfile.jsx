@@ -39,7 +39,7 @@ const MyProfile = () => {
         />
         <div>
           <h2 className="text-xl font-bold font-poppins">{profile?.name}</h2>
-          <p className="text-gray-500">{profile.email}</p>
+          <p className="text-gray-500 text-sm">{profile.email}</p>
           {/* Badge */}
           {profile?.badge === "gold" && (
             <div className="mt-2 badge badge-warning text-white flex items-center gap-1 mx-auto">

@@ -35,7 +35,7 @@ const Sidebar = () => {
                   src={logo}
                   alt="brand logo"
                 />
-                <img className="w-40" src={logoText} alt="brand text" />
+                <img className="w-30" src={logoText} alt="brand text" />
               </div>
             </NavLink>
           </div>
