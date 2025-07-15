@@ -57,7 +57,7 @@ const PrivacyPolicy = () => {
         <h2 className="text-xl font-semibold mb-2">6. Changes to Policy</h2>
         <p className="text-gray-700 text-justify">
           This policy may change over time. You’ll be notified of significant
-          updates via announcements or email.
+          updates via announcements.
         </p>
       </div>
     </div>

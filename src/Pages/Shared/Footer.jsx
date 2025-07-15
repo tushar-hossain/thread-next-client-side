@@ -49,9 +49,7 @@ const Footer = () => {
                   <NavLink to="privacy">Privacy</NavLink>
                 </li>
                 <li>
-                  <a rel="noopener noreferrer" href="#">
-                    Terms of Service
-                  </a>
+                  <NavLink to="terms">Terms of Service</NavLink>                  
                 </li>
               </ul>
             </div>
