@@ -8,9 +8,6 @@ import useUserRole from "../../../../hooks/useUserRole";
 import { Helmet } from "react-helmet-async";
 
 const AdminAnnouncement = () => {
-  <Helmet>
-    <title>Admin Announcement</title>
-  </Helmet>;
   const { user } = useAuth();
   const axiosSecure = useAxiosSecure();
   const { role } = useUserRole();
@@ -52,6 +49,9 @@ const AdminAnnouncement = () => {
 
   return (
     <div>
+      <Helmet>
+        <title>Admin Announcement</title>
+      </Helmet>
       <h2 className="text-2xl font-bold mb-4">Make Announcement</h2>
       <p className="text-gray-600 mt-1 mb-6">
         Share important updates, news, or community guidelines with all users.

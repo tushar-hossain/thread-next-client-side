@@ -16,9 +16,6 @@ import toast from "react-hot-toast";
 import { Helmet } from "react-helmet-async";
 
 const AdminProfile = () => {
-  <Helmet>
-    <title>Admin Profile</title>
-  </Helmet>;
   const { user } = useAuth();
   const axiosSecure = useAxiosSecure();
 
@@ -61,6 +58,9 @@ const AdminProfile = () => {
 
   return (
     <div className="max-w-4xl mx-auto space-y-10 py-6 px-4">
+      <Helmet>
+        <title>Admin Profile</title>
+      </Helmet>
       <div className="card shadow-md hover:shadow-[0px_10px_1px_rgba(221,_221,_221,_1),_0_10px_20px_rgba(204,_204,_204,_1)] bg-white p-6">
         <div className="flex items-center gap-4">
           <img

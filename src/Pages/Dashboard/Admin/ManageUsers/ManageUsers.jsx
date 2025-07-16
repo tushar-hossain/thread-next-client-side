@@ -6,9 +6,6 @@ import toast from "react-hot-toast";
 import { Helmet } from "react-helmet-async";
 
 const ManageUsers = () => {
-  <Helmet>
-    <title>Manage Users</title>
-  </Helmet>;
   const [searchName, setSearchName] = useState("");
   const axiosSecure = useAxiosSecure();
 
@@ -39,6 +36,9 @@ const ManageUsers = () => {
 
   return (
     <div>
+      <Helmet>
+        <title>Manage Users</title>
+      </Helmet>
       <div>
         <h2 className="text-xl font-bold font-poppins mb-4">Manage Users</h2>
         <p className="text-gray-600 mt-1 mb-6">

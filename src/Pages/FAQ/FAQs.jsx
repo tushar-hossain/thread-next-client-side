@@ -2,9 +2,7 @@ import React from "react";
 import { Helmet } from "react-helmet-async";
 
 const FAQs = () => {
-    <Helmet>
-      <title>FAQs</title>
-    </Helmet>;
+    ;
   const faqs = [
     {
       question: "What is this forum platform about?",
@@ -35,6 +33,9 @@ const FAQs = () => {
 
   return (
     <div className="max-w-4xl mx-auto p-6 space-y-4 my-10">
+      <Helmet>
+        <title>FAQs</title>
+      </Helmet>
       <h2 className="text-2xl font-bold mb-4 text-center text-primary">
         Frequently Asked Questions
       </h2>

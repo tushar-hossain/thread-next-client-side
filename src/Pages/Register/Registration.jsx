@@ -10,9 +10,6 @@ import toast from "react-hot-toast";
 import { Helmet } from "react-helmet-async";
 
 const Registration = () => {
-  <Helmet>
-    <title>Register</title>
-  </Helmet>;
   const [eye, setEye] = useState(false);
   const { setUser, createUser, updateUser } = useAuth();
   const navigate = useNavigate();
@@ -72,6 +69,9 @@ const Registration = () => {
 
   return (
     <div className="py-10">
+      <Helmet>
+        <title>Register</title>
+      </Helmet>
       <div className="flex flex-col max-w-md mx-auto p-10 space-y-2 text-center bg-[#111827] text-gray-50 rounded-lg">
         <h1 className="text-xl md:text-3xl font-semibold">
           Register in your account

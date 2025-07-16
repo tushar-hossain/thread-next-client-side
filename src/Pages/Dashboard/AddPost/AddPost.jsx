@@ -10,9 +10,6 @@ import { useNavigate } from "react-router";
 import { Helmet } from "react-helmet-async";
 
 const AddPost = () => {
-  <Helmet>
-    <title>Add Post</title>
-  </Helmet>;
   const { user } = useAuth();
   const [selectedTags, setSelectedTags] = useState([]);
   const axiosSecure = useAxiosSecure();
@@ -109,6 +106,9 @@ const AddPost = () => {
 
   return (
     <div>
+      <Helmet>
+        <title>Add Post</title>
+      </Helmet>
       <h2 className="text-xl md:text-2xl font-bold text-primary mb-6">
         Create a New Post
       </h2>

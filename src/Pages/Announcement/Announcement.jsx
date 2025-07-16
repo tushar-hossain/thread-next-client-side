@@ -3,10 +3,6 @@ import useAnnouncement from "../../hooks/useAnnouncement";
 import { Helmet } from "react-helmet-async";
 
 const Announcement = () => {
-  <Helmet>
-    <title>Announcements</title>
-  </Helmet>;
-
   const { announcements, isLoading } = useAnnouncement();
 
   if (isLoading || announcements.length === 0) {
@@ -19,10 +15,12 @@ const Announcement = () => {
 
   return (
     <div className="w-11/12 mx-auto my-10">
+      <Helmet>
+        <title>Announcements</title>
+      </Helmet>
       <h2 className="text-xl md:text-2xl font-semibold font-poppins mb-5">
         Announcements
       </h2>
-
       <ul className="space-y-3">
         {announcements.map((announcement) => (
           <div>

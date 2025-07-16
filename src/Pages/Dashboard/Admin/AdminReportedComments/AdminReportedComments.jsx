@@ -6,9 +6,6 @@ import toast from "react-hot-toast";
 import { Helmet } from "react-helmet-async";
 
 const AdminReportedComments = () => {
-  <Helmet>
-    <title>Admin Reported Comments</title>
-  </Helmet>;
   const axiosSecure = useAxiosSecure();
 
   const {
@@ -49,6 +46,9 @@ const AdminReportedComments = () => {
 
   return (
     <div>
+      <Helmet>
+        <title>Admin Reported Comments</title>
+      </Helmet>
       <div>
         <h2 className="text-xl font-semibold mb-4 font-poppins">
           Reported Comments

@@ -64,7 +64,7 @@ const PostList = () => {
       </div>
 
       {/* showing posts here */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-2">
+      <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-2">
         {posts.map((post) => (
           <div key={post._id} className=" card bg-white shadow-md p-5">
             <div className="mb-3">

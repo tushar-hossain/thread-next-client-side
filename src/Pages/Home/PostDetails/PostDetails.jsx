@@ -14,6 +14,7 @@ import {
   WhatsappShareButton,
   WhatsappIcon,
 } from "react-share";
+import { Helmet } from "react-helmet-async";
 
 const PostDetails = () => {
   const { user } = useAuth();
@@ -88,6 +89,9 @@ const PostDetails = () => {
 
   return (
     <section className="w-11/12 mx-auto my-10">
+      <Helmet>
+        <title>Post Details</title>
+      </Helmet>
       <div>
         <div>
           <div>
@@ -150,14 +154,14 @@ const PostDetails = () => {
           {/*  */}
           <div className="flex gap-3">
             <FacebookShareButton
-              url={`${import.meta.env.VITE_SERVER_URL}/postDetails/${id}`}
+              url={`https://thread-nest-2b0d5.web.app/postDetails/${id}`}
               quote={posts?.title}
             >
               <FacebookIcon size={32} round />
             </FacebookShareButton>
 
             <WhatsappShareButton
-              url={`${import.meta.env.VITE_SERVER_URL}/postDetails/${id}`}
+              url={`https://thread-nest-2b0d5.web.app/postDetails/${id}`}
               quote={posts?.title}
             >
               <WhatsappIcon size={32} round />

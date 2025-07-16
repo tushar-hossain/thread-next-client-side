@@ -2,6 +2,10 @@
 
 A fully functional **Forum web application frontend** developed using **React**, styled with **Tailwind CSS** and **DaisyUI**. This application supports user authentication, post creation, voting, comments, membership system, admin functionalities, and more.
 
+## 🚀 Live Demo
+
+👉 [View Live Site](https://thread-nest-2b0d5.web.app/)
+
 ---
 
 ## 🚀 Features
@@ -133,7 +137,6 @@ git clone https://github.com/your-username/forum-frontend.git
 cd forum-frontend
 npm install
 npm run dev
-
 ``` -->
 
 ## ✨ Contribution

@@ -9,9 +9,7 @@ import { Modal } from "react-responsive-modal";
 import { Helmet } from "react-helmet-async";
 
 const CommentsPage = () => {
-    <Helmet>
-      <title>Comments Page</title>
-    </Helmet>;
+   ;
   const { id: postId } = useParams();
   const axiosSecure = useAxiosSecure();
   const [selectedFeedback, setSelectedFeedback] = useState({});
@@ -67,6 +65,10 @@ const CommentsPage = () => {
 
   return (
     <div className="overflow-x-auto">
+      {" "}
+      <Helmet>
+        <title>Comments Page</title>
+      </Helmet>
       <h1 className="text-xl font-bold mb-4">All Comments</h1>
       <table className="table table-zebra w-full">
         <thead>

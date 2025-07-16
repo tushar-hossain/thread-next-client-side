@@ -6,11 +6,12 @@ import { Helmet } from "react-helmet-async";
 const stripePromise = loadStripe(import.meta.env.VITE_payment_key);
 
 const Payment = () => {
-  <Helmet>
-    <title>Payment</title>
-  </Helmet>;
+  ;
   return (
     <div className="my-10">
+      <Helmet>
+        <title>Payment</title>
+      </Helmet>
       <Elements stripe={stripePromise}>
         <CheckoutForm />
       </Elements>

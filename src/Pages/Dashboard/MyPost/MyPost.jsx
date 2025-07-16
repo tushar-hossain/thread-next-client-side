@@ -9,9 +9,7 @@ import toast from "react-hot-toast";
 import { Helmet } from "react-helmet-async";
 
 const MyPost = () => {
-  <Helmet>
-    <title>My Post</title>
-  </Helmet>;
+  ;
   const { user } = useAuth();
   const axiosSecure = useAxiosSecure();
 
@@ -62,6 +60,9 @@ const MyPost = () => {
 
   return (
     <div className="overflow-x-auto">
+      <Helmet>
+        <title>My Post</title>
+      </Helmet>
       <h2 className="text-xl md:text-2xl font-bold text-primary mb-6">
         My Posts
       </h2>

@@ -2,11 +2,11 @@ import React from "react";
 import { Helmet } from "react-helmet-async";
 
 const TermsOfService = () => {
-  <Helmet>
-    <title>Terms Of Service</title>
-  </Helmet>;
   return (
     <div className="max-w-4xl mx-auto my-10 space-y-6">
+      <Helmet>
+        <title>Terms Of Service</title>
+      </Helmet>
       <h1 className="text-3xl font-bold text-center text-primary">
         Terms of Service
       </h1>

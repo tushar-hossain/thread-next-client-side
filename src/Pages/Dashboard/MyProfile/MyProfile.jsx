@@ -7,9 +7,7 @@ import { FaMedal } from "react-icons/fa";
 import { Helmet } from "react-helmet-async";
 
 const MyProfile = () => {
-  <Helmet>
-    <title>My Profile</title>
-  </Helmet>;
+  ;
   const { user } = useAuth();
   const axiosSecure = useAxiosSecure();
 
@@ -35,6 +33,9 @@ const MyProfile = () => {
 
   return (
     <div>
+      <Helmet>
+        <title>My Profile</title>
+      </Helmet>
       <div className="text-center">
         <img
           src={profile?.image}

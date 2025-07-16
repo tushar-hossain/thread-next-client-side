@@ -5,11 +5,11 @@ import PostList from "./PostList/PostList";
 import { Helmet } from "react-helmet-async";
 
 const Home = () => {
-  <Helmet>
-    <title>Home</title>
-  </Helmet>;
   return (
     <div>
+      <Helmet>
+        <title>Home</title>
+      </Helmet>
       <section>
         <BannerSection />
       </section>
