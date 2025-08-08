@@ -132,7 +132,7 @@ VITE_FIREBASE_AUTH_DOMAIN=your_auth_domain
  ## 🧪 Run Locally
 
 ```
-https://github.com/tushar-hossain/thread-next-client-side.git
+git clone https://github.com/tushar-hossain/thread-next-client-side.git
 cd thread-next-client-side
 npm install
 npm run dev
