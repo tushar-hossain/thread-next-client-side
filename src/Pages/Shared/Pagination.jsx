@@ -31,7 +31,7 @@ const Pagination = ({ page, setPage, totalPages }) => {
         className={`btn ${page === 1 ? "btn-active btn-primary" : ""}`}
         onClick={() => setPage(1)}
       >
-        1
+        {page}
       </button>
 
       {getPageNumbers().map((p, idx) =>

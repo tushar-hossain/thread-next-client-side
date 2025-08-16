@@ -1,6 +1,12 @@
 import React, { useState } from "react";
-import { FaEye } from "react-icons/fa";
-import { FaEyeSlash } from "react-icons/fa";
+import {
+  FaEye,
+  FaEyeSlash,
+  FaUpload,
+  FaUser,
+  FaEnvelope,
+  FaLock,
+} from "react-icons/fa";
 import { Link, useLocation, useNavigate } from "react-router";
 import SocialLogin from "./SocialLogin";
 import { useForm } from "react-hook-form";
@@ -11,161 +17,313 @@ import { Helmet } from "react-helmet-async";
 
 const Registration = () => {
   const [eye, setEye] = useState(false);
+  const [photoPreview, setPhotoPreview] = useState(null);
   const { setUser, createUser, updateUser } = useAuth();
   const navigate = useNavigate();
   const location = useLocation();
-  // react form hook
+
   const {
     register,
     formState: { errors },
     handleSubmit,
+    watch,
   } = useForm();
 
-  // submit form data
+  // Watch photo field to show preview
+  const watchPhoto = watch("photo");
+  React.useEffect(() => {
+    if (watchPhoto && watchPhoto[0]) {
+      const file = watchPhoto[0];
+      const reader = new FileReader();
+      reader.onloadend = () => setPhotoPreview(reader.result);
+      reader.readAsDataURL(file);
+    }
+  }, [watchPhoto]);
+
   const onSubmit = async (data) => {
     const { photo, ...userInfo } = data;
 
-    const formData = new FormData();
-    formData.append("image", photo[0]);
-    const res = await axios.post(
-      `https://api.imgbb.com/1/upload?key=${import.meta.env.VITE_IMGB_API}`,
-      formData
-    );
-    userInfo.photo = res.data.data.url;
+    try {
+      // Upload image to imgbb
+      const formData = new FormData();
+      formData.append("image", photo[0]);
+      const res = await axios.post(
+        `https://api.imgbb.com/1/upload?key=${import.meta.env.VITE_IMGB_API}`,
+        formData
+      );
+      userInfo.photo = res.data.data.url;
 
-    // create user
-    createUser(userInfo.email, userInfo.password)
-      .then(async (result) => {
-        // backend post user info
-        const usersInfo = {
-          name: data.name,
-          email: data.email,
-          image: res.data.data.url,
-        };
+      // Create user with Firebase
+      const result = await createUser(userInfo.email, userInfo.password);
 
-        const userRes = await axios.post(
-          `${import.meta.env.VITE_SERVER_URL}/users`,
-          usersInfo
-        );
+      // Save user info to backend
+      const usersInfo = {
+        name: data.name,
+        email: data.email,
+        image: res.data.data.url,
+      };
 
-        if (userRes.data.insertedId) {
-          toast.success("Registration successful");
-        }
+      const userRes = await axios.post(
+        `${import.meta.env.VITE_SERVER_URL}/users`,
+        usersInfo
+      );
 
-        // update profile in the firebase
-        const userProfile = {
-          displayName: userInfo.name,
-          photoURL: userInfo.photo,
-        };
-        updateUser(userProfile)
-          .then(() => {
-            setUser(result.user);
-            navigate(location.state || "/");
-          })
-          .catch(() => {});
-      })
-      .catch(() => toast.error("Registration failed"));
+      if (userRes.data.insertedId) {
+        toast.success("Registration successful");
+      }
+
+      // Update Firebase profile
+      const userProfile = {
+        displayName: userInfo.name,
+        photoURL: userInfo.photo,
+      };
+
+      await updateUser(userProfile);
+      setUser(result.user);
+      navigate(location.state || "/");
+    } catch (error) {
+      console.error("Registration error:", error);
+      toast.error("Registration failed. Please try again.");
+    }
   };
 
   return (
-    <div className="py-10">
+    <div className="py-10 bg-slate-50 min-h-screen">
       <Helmet>
-        <title>Register</title>
+        <title>Register - ThredNest</title>
       </Helmet>
-      <div className="flex flex-col max-w-md mx-auto p-10 space-y-2 text-center bg-[#111827] text-gray-50 rounded-lg">
-        <h1 className="text-xl md:text-3xl font-semibold">
-          Register in your account
-        </h1>
-        <form onSubmit={handleSubmit(onSubmit)} className="space-y-2">
-          <div className="flex flex-col">
-            {/* name */}
-            <div>
-              <label htmlFor="name" className="sr-only">
-                Name
+      <div className="flex flex-col max-w-md mx-auto p-8 space-y-6 text-center bg-slate-800 text-slate-50 rounded-xl shadow-xl border border-slate-700">
+        {/* Header */}
+        <div className="space-y-2">
+          <h1 className="text-2xl md:text-3xl font-bold text-sky-300">
+            Join ThredNest
+          </h1>
+          <p className="text-slate-300 text-sm">
+            Create your account and start connecting
+          </p>
+        </div>
+
+        <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
+          <div className="flex flex-col space-y-4 text-left">
+            {/* Name */}
+            <div className="space-y-1">
+              <label
+                htmlFor="name"
+                className="text-sm font-medium text-slate-200 flex items-center gap-2"
+              >
+                <FaUser className="text-sky-400" />
+                Full Name
               </label>
               <input
                 type="text"
-                placeholder="Name"
-                {...register("name", { required: true })}
+                placeholder="Enter your full name"
+                {...register("name", {
+                  required: "Name is required",
+                  minLength: {
+                    value: 2,
+                    message: "Name must be at least 2 characters",
+                  },
+                })}
                 aria-invalid={errors.name ? "true" : "false"}
-                className="rounded-t-md border px-2 focus:ring-2 w-full py-2 bg-gray-50 text-black"
+                className="rounded-lg border border-slate-600 px-4 py-3 w-full bg-slate-700 text-slate-100 placeholder-slate-400 focus:ring-2 focus:ring-sky-500 focus:border-sky-500 transition-all duration-200"
               />
-              {errors.name?.type === "required" && (
-                <p className="text-red-500 text-sm">Name is required</p>
+              {errors.name && (
+                <p className="text-red-400 text-sm flex items-center gap-1">
+                  <span className="text-xs">⚠️</span>
+                  {errors.name.message}
+                </p>
               )}
             </div>
 
-            {/* email */}
-            <div>
-              <label htmlFor="email" className="sr-only">
-                Email address
+            {/* Email */}
+            <div className="space-y-1">
+              <label
+                htmlFor="email"
+                className="text-sm font-medium text-slate-200 flex items-center gap-2"
+              >
+                <FaEnvelope className="text-sky-400" />
+                Email Address
               </label>
               <input
                 type="email"
-                {...register("email", { required: true })}
+                {...register("email", {
+                  required: "Email is required",
+                  pattern: {
+                    value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+                    message: "Invalid email address",
+                  },
+                })}
                 aria-invalid={errors.email ? "true" : "false"}
-                placeholder="Email address"
-                className="border px-2 focus:ring-2 w-full py-2 bg-gray-50 text-black"
+                placeholder="Enter your email"
+                className="rounded-lg border border-slate-600 px-4 py-3 w-full bg-slate-700 text-slate-100 placeholder-slate-400 focus:ring-2 focus:ring-sky-500 focus:border-sky-500 transition-all duration-200"
               />
-              {errors.name?.type === "required" && (
-                <p className="text-red-500 text-sm">Email is required</p>
+              {errors.email && (
+                <p className="text-red-400 text-sm flex items-center gap-1">
+                  <span className="text-xs">⚠️</span>
+                  {errors.email.message}
+                </p>
               )}
             </div>
 
-            {/* password */}
-            <div className="relative">
-              <label htmlFor="password" className="sr-only">
-                Photo
-              </label>
-              <input
-                type={eye ? "text" : "password"}
-                {...register("password", { required: true })}
-                aria-invalid={errors.password ? "true" : "false"}
-                placeholder="Password"
-                className="border px-2 focus:ring-2 w-full py-2 bg-gray-50 text-black"
-              />
-              <p
-                onClick={() => setEye(!eye)}
-                className=" absolute text-black top-4 right-4"
+            {/* Password */}
+            <div className="space-y-1">
+              <label
+                htmlFor="password"
+                className="text-sm font-medium text-slate-200 flex items-center gap-2"
               >
-                {eye ? <FaEyeSlash /> : <FaEye />}
-              </p>
-              {errors.password?.type === "required" && (
-                <p className="text-red-500 text-sm">Password is required</p>
+                <FaLock className="text-sky-400" />
+                Password
+              </label>
+              <div className="relative">
+                <input
+                  type={eye ? "text" : "password"}
+                  {...register("password", {
+                    required: "Password is required",
+                    minLength: {
+                      value: 6,
+                      message: "Password must be at least 6 characters",
+                    },
+                  })}
+                  aria-invalid={errors.password ? "true" : "false"}
+                  placeholder="Create a strong password"
+                  className="rounded-lg border border-slate-600 px-4 py-3 w-full bg-slate-700 text-slate-100 placeholder-slate-400 focus:ring-2 focus:ring-sky-500 focus:border-sky-500 transition-all duration-200 pr-12"
+                />
+                <button
+                  type="button"
+                  onClick={() => setEye(!eye)}
+                  className="absolute right-4 top-1/2 -translate-y-1/2 text-slate-400 hover:text-sky-400 transition-colors"
+                >
+                  {eye ? <FaEyeSlash /> : <FaEye />}
+                </button>
+              </div>
+              {errors.password && (
+                <p className="text-red-400 text-sm flex items-center gap-1">
+                  <span className="text-xs">⚠️</span>
+                  {errors.password.message}
+                </p>
               )}
             </div>
-            {/* photo */}
-            <div>
-              <label htmlFor="photo" className="sr-only">
-                Photo
+
+            {/* Photo Upload */}
+            <div className="space-y-1">
+              <label
+                htmlFor="photo"
+                className="text-sm font-medium text-slate-200 flex items-center gap-2"
+              >
+                <FaUpload className="text-sky-400" />
+                Profile Photo
               </label>
-              <input
-                type="file"
-                placeholder="Your photo"
-                {...register("photo", { required: true })}
-                aria-invalid={errors.photo ? "true" : "false"}
-                className="rounded-b-md border px-2 focus:ring-2 w-full py-2 bg-gray-50 text-black"
-              />
-              {errors.photo?.type === "required" && (
-                <p className="text-red-500 text-sm">Photo is required</p>
-              )}
+              <div className="space-y-3">
+                <input
+                  type="file"
+                  accept="image/*"
+                  {...register("photo", {
+                    required: "Profile photo is required",
+                    validate: {
+                      fileSize: (files) => {
+                        if (files[0] && files[0].size > 5 * 1024 * 1024) {
+                          return "File size must be less than 5MB";
+                        }
+                        return true;
+                      },
+                    },
+                  })}
+                  aria-invalid={errors.photo ? "true" : "false"}
+                  className="rounded-lg border border-slate-600 px-4 py-3 w-full bg-slate-700 text-slate-100 file:bg-sky-500 file:text-white file:border-0 file:rounded file:px-3 file:py-1 file:mr-3 file:hover:bg-sky-600 transition-all duration-200 focus:ring-2 focus:ring-sky-500 focus:border-sky-500"
+                />
+
+                {/* Photo Preview */}
+                {photoPreview && (
+                  <div className="flex justify-center">
+                    <div className="relative">
+                      <img
+                        src={photoPreview}
+                        alt="Preview"
+                        className="w-16 h-16 rounded-full object-cover border-2 border-sky-400"
+                      />
+                      <div className="absolute -top-1 -right-1 bg-sky-500 text-white rounded-full w-5 h-5 flex items-center justify-center text-xs">
+                        ✓
+                      </div>
+                    </div>
+                  </div>
+                )}
+
+                {errors.photo && (
+                  <p className="text-red-400 text-sm flex items-center gap-1">
+                    <span className="text-xs">⚠️</span>
+                    {errors.photo.message}
+                  </p>
+                )}
+              </div>
             </div>
           </div>
 
-          <input
-            className="btn bg-blue-500 hover:bg-blue-600 text-white rounded w-full"
+          {/* Terms and Conditions */}
+          <div className="flex items-start gap-3 text-sm">
+            <input
+              type="checkbox"
+              id="terms"
+              {...register("terms", {
+                required: "You must agree to terms and conditions",
+              })}
+              className="mt-1 accent-sky-500 bg-slate-700 border-slate-600"
+            />
+            <label htmlFor="terms" className="text-slate-300 leading-relaxed">
+              I agree to the{" "}
+              <Link
+                to="/terms"
+                className="text-sky-400 hover:text-sky-300 underline"
+              >
+                Terms of Service
+              </Link>{" "}
+              and{" "}
+              <Link
+                to="/privacy"
+                className="text-sky-400 hover:text-sky-300 underline"
+              >
+                Privacy Policy
+              </Link>
+            </label>
+          </div>
+          {errors.terms && (
+            <p className="text-red-400 text-sm flex items-center gap-1 -mt-2">
+              <span className="text-xs">⚠️</span>
+              {errors.terms.message}
+            </p>
+          )}
+
+          {/* Submit Button */}
+          <button
             type="submit"
-            value="Register"
-          />
+            className="w-full bg-sky-500 hover:bg-sky-600 active:bg-sky-700 text-white py-3 px-6 rounded-lg font-medium transition-all duration-200 focus:ring-2 focus:ring-sky-500 focus:ring-offset-2 focus:ring-offset-slate-800 transform hover:scale-[1.02] active:scale-[0.98]"
+          >
+            Create Account
+          </button>
         </form>
-        <div className="divider">OR</div>
-        {/* Google */}
+
+        {/* Divider */}
+        <div className="relative">
+          <div className="absolute inset-0 flex items-center">
+            <div className="w-full border-t border-slate-600"></div>
+          </div>
+          <div className="relative flex justify-center text-sm">
+            <span className="px-4 bg-slate-800 text-slate-400">
+              or continue with
+            </span>
+          </div>
+        </div>
+
+        {/* Social Login */}
         <SocialLogin />
 
-        <p className="text-xs text-center sm:px-6 dark:text-white">
+        {/* Sign in link */}
+        <p className="text-sm text-slate-300">
           Already have an account?{" "}
-          <Link to="/joinUs" className=" underline font-bold">
-            Join Us
+          <Link
+            to="/joinUs"
+            className="text-sky-400 hover:text-sky-300 font-semibold transition-colors"
+          >
+            Sign In
           </Link>
         </p>
       </div>

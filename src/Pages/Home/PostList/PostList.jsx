@@ -142,6 +142,7 @@ const PostList = () => {
       <div className="mt-10 text-center">
         <Pagination page={page} setPage={setPage} totalPages={totalPages} />
       </div>
+      {console.log(page)}
     </div>
   );
 };
