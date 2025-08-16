@@ -24,7 +24,7 @@ const AllTags = ({ setSearchItem }) => {
     return <p className="text-center text-error mt-4">Failed to load tags.</p>;
 
   return (
-    <div className="max-w-2xl mx-auto py-8 px-4 md:px-12 rounded-lg text-white">
+    <div className="max-w-2xl mx-auto py-3 px-4 md:px-12 rounded-lg text-white">
       <div className="flex flex-wrap justify-center gap-3 text-white">
         {tags.map((tag) => (
           <span
