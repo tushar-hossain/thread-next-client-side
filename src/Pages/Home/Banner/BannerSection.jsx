@@ -67,7 +67,7 @@ const BannerSection = () => {
               onChange={(e) => setSearchItem(e.target.value)}
               type="text"
               className="w-full px-6 py-4 pl-12 pr-32 text-lg bg-white/10 backdrop-blur-sm border border-slate-600 rounded-2xl text-white placeholder-slate-400 focus:ring-2 focus:ring-sky-500 focus:border-sky-500 focus:outline-none transition-all duration-200"
-              placeholder="Search posts by tags (e.g., technology, health, lifestyle)"
+              placeholder="Search posts by tags"
             />
             <FaSearch className="absolute left-4 top-1/2 transform -translate-y-1/2 text-slate-400" />
 
