@@ -2,23 +2,20 @@
 
 A fully functional **Forum web application frontend** developed using **React**, styled with **Tailwind CSS** and **DaisyUI**. This application supports user authentication, post creation, voting, comments, membership system, admin functionalities, and more.
 
-## 🚀 Live Demo
-
-👉 [View Live Site](https://thread-nest-2b0d5.web.app/)
+## 🚀 Live Demo  # https://thread-nest-2b0d5.web.app/
 
 ---
 
-## 🚀 Features
+## ⚙️ Core Features
 
-- ✅ User Registration & Login (with social login)
-- 📝 Create, View and Delete Posts
-- 💬 Add and View Comments
-- 👍 Upvote / 👎 Downvote Posts
-- 🔄 Sort Posts by Newest or Popularity
-- 🔍 Search Posts by Tags
-- 🏅 Membership System with Gold Badge
-- 🔒 Private Routes for Dashboard
-- 🛎️ Announcement Notifications
+- User authentication and role-based access
+- Create, view, and vote on posts
+- Admin dashboard with analytics and user management
+- Tag management system
+- Real-time post sorting (newest, popular)
+- Comments and report system
+- Announcement system for admins
+- Dynamic routing and SEO-friendly titles
 
 ---
 
@@ -130,14 +127,14 @@ VITE_FIREBASE_AUTH_DOMAIN=your_auth_domain
 
 ---
 
-<!-- ## 🧪 Run Locally
+ ## 🧪 Run Locally
 
 ```
-git clone https://github.com/your-username/forum-frontend.git
-cd forum-frontend
+git clone https://github.com/tushar-hossain/thread-next-client-side.git
+cd thread-next-client-side
 npm install
 npm run dev
-``` -->
+```
 
 ## ✨ Contribution
 

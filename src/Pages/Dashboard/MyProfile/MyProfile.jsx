@@ -1,4 +1,3 @@
-import React from "react";
 import useAuth from "../../../hooks/useAuth";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import { useQuery } from "@tanstack/react-query";
@@ -7,7 +6,6 @@ import { FaMedal } from "react-icons/fa";
 import { Helmet } from "react-helmet-async";
 
 const MyProfile = () => {
-  ;
   const { user } = useAuth();
   const axiosSecure = useAxiosSecure();
 
