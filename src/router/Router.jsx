@@ -22,6 +22,7 @@ import FAQs from "../Pages/FAQ/FAQs";
 import PrivacyPolicy from "../Pages/PrivacyPolicy/PrivacyPolicy";
 import TermsOfService from "../Pages/TermsOfService/TermsOfService";
 import ErrorPage from "../Pages/Error/ErrorPage";
+import EditPost from "../Pages/EditPost/EditPost";
 
 export const router = createBrowserRouter([
   {
@@ -56,9 +57,17 @@ export const router = createBrowserRouter([
         path: "payment",
         Component: Payment,
       },
+      {
+        path: "edit-post/:id",
+        element: (
+          <PrivateRoute>
+            <EditPost />
+          </PrivateRoute>
+        ),
+      },
     ],
   },
-  
+
   // dashboard
   {
     path: "dashboard",

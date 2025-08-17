@@ -245,7 +245,7 @@ const MyProfile = () => {
               My Recent Posts
             </h3>
             <Link
-              to="/create-post"
+              to="/dashboard/add-post"
               className="text-sky-600 hover:text-sky-700 text-sm font-medium flex items-center gap-1 transition-colors duration-200"
             >
               <FaEdit size={14} />
@@ -310,17 +310,19 @@ const MyProfile = () => {
 
                     <div className="flex sm:flex-col gap-2">
                       <Link
-                        to={`/post/${post._id}`}
+                        to={`/postDetails/${post._id}`}
                         className="bg-sky-500 hover:bg-sky-600 text-white px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200 flex items-center gap-2 w-fit"
                       >
                         <FaEye size={14} />
                         View
                       </Link>
 
-                      <button className="bg-slate-500 hover:bg-slate-600 text-white px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200 flex items-center gap-2 w-fit">
-                        <FaEdit size={14} />
-                        Edit
-                      </button>
+                      <Link to={`/edit-post/${post._id}`}>
+                        <button className="bg-slate-500 hover:bg-slate-600 text-white px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200 flex items-center gap-2 w-fit">
+                          <FaEdit size={14} />
+                          Edit
+                        </button>
+                      </Link>
                     </div>
                   </div>
                 </div>
