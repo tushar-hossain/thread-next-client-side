@@ -1,4 +1,5 @@
 import BannerSection from "./Banner/BannerSection";
+import Features from "./Feature/Feature";
 import PostList from "./PostList/PostList";
 import { Helmet } from "react-helmet-async";
 
@@ -16,6 +17,10 @@ const Home = () => {
       <section className="w-11/12 mx-auto">
         <PostList />
       </section>
+
+      <search>
+        <Features />
+      </search>
     </div>
   );
 };
