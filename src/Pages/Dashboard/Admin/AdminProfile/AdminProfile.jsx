@@ -118,7 +118,7 @@ const AdminProfile = () => {
   if (isLoading) return <Loading />;
 
   return (
-    <div className="min-h-screen bg-slate-50 py-8 px-4 sm:px-6 lg:px-8">
+    <div className="min-h-screen rounded-md bg-slate-50 py-8 px-4 sm:px-6 lg:px-8">
       <Helmet>
         <title>Admin Dashboard - ThredNest</title>
       </Helmet>
