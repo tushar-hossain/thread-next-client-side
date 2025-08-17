@@ -32,41 +32,44 @@ const PostList = () => {
   const totalPages = Math.ceil(total / limit);
 
   return (
-    <div className="my-10 bg-base-200 p-5 rounded-lg">
+    <div className="my-10 bg-slate-50 p-5 rounded-lg">
       <div className="flex justify-between items-center mb-6">
-        <h2 className="text-xl md:text-2xl font-bold font-poppins text-primary">
+        <h2 className="text-xl md:text-2xl font-bold font-poppins text-sky-500">
           All Posts
         </h2>
 
-        {/* button sort data newest and popular */}
+        {/* Sort buttons with consistent sky-500 primary color */}
         <div className="flex gap-2">
           <button
             onClick={() => setSortBy("newest")}
-            className={`hover:bg-blue-600 ${
+            className={`btn border-sky-500 text-sky-500 hover:bg-sky-500 hover:text-white hover:border-sky-500 transition-colors ${
               sortBy === "newest"
-                ? "btn bg-blue-500 btn-outline text-white"
-                : "btn bg-blue-500 btn-outline"
-            } `}
+                ? "bg-sky-500 text-white border-sky-500"
+                : "bg-white"
+            }`}
           >
             Newest
           </button>
           <button
             onClick={() => setSortBy("popular")}
-            className={`hover:bg-blue-600 ${
+            className={`btn border-sky-500 text-sky-500 hover:bg-sky-500 hover:text-white hover:border-sky-500 transition-colors ${
               sortBy === "popular"
-                ? "btn bg-blue-500 btn-outline text-white"
-                : "btn bg-blue-500 btn-outline"
-            } `}
+                ? "bg-sky-500 text-white border-sky-500"
+                : "bg-white"
+            }`}
           >
             Popular
           </button>
         </div>
       </div>
 
-      {/* showing posts here */}
-      <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-2">
+      {/* Posts grid */}
+      <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-4">
         {posts.map((post) => (
-          <div key={post._id} className=" card bg-white shadow-md p-5">
+          <div
+            key={post._id}
+            className="card bg-white shadow-md p-5 border border-slate-200 hover:shadow-lg transition-shadow"
+          >
             <div className="mb-3">
               <img
                 className="object-cover object-center w-full rounded-t-md h-35 mb-2"
@@ -74,49 +77,52 @@ const PostList = () => {
                 alt="Author"
               />
               <div>
-                <h3 className="font-semibold text-center">{post.title}</h3>
-                <p className="text-sm text-gray-500 text-center">
+                <h3 className="font-semibold text-center text-slate-800">
+                  {post.title}
+                </h3>
+                <p className="text-sm text-slate-500 text-center">
                   {post.authorName}
                 </p>
               </div>
             </div>
-            {/* tags */}
+
+            {/* Tags with consistent primary color */}
             <div className="flex flex-wrap gap-2 mb-2">
               {post.tags.map((tag, index) => (
-                <span key={index} className="badge badge-outline badge-primary">
+                <span
+                  key={index}
+                  className="badge badge-outline border-sky-500 text-sky-500"
+                >
                   {tag}
                 </span>
               ))}
             </div>
 
-            {/* vote count  */}
+            {/* Vote count with consistent colors */}
             <div className="flex justify-between items-center text-sm flex-1 mt-3">
               <div className="flex gap-3">
-                <span className="flex items-center gap-1">
-                  <span>
-                    <BiSolidLike className="inline text-blue-500" size={20} />{" "}
+                <span className="flex items-center gap-1 text-slate-600">
+                  <span className="flex items-center gap-1">
+                    <BiSolidLike className="text-emerald-500" size={20} />
                     {post.upVote}
-                  </span>{" "}
+                  </span>
                   /
-                  <span>
-                    {post.downVote}{" "}
-                    <BiSolidDislike
-                      className="inline text-blue-500"
-                      size={20}
-                    />
+                  <span className="flex items-center gap-1">
+                    {post.downVote}
+                    <BiSolidDislike className="text-red-500" size={20} />
                   </span>
                 </span>
               </div>
-              <span className="text-sm">
-                Total Votes {post.upVote - post.downVote}
+              <span className="text-sm text-slate-600 font-medium">
+                Total: {post.upVote - post.downVote}
               </span>
             </div>
 
-            {/* view details page link */}
-            <div className="mt-4 text-right">
+            {/* View details button with primary color */}
+            <div className="mt-4">
               <Link
                 to={`postDetails/${post?._id}`}
-                className="btn bg-blue-500 hover:bg-blue-600 text-white w-full"
+                className="btn bg-sky-500 hover:bg-sky-600 text-white w-full border-sky-500 hover:border-sky-600 transition-colors"
               >
                 View Details
               </Link>
@@ -124,25 +130,9 @@ const PostList = () => {
           </div>
         ))}
       </div>
-
-      {/* pagination */}
-      {/* <div className="flex justify-center mt-8 gap-2">
-        {Array.from({ length: totalPages }, (_, index) => (
-          <button
-            onClick={() => setPage(index + 1)}
-            key={index}
-            className={`btn bg-blue-500 hover:bg-blue-600 text-white rounded ${
-              page === index + 1 ? "btn-primary" : "btn-outline"
-            }`}
-          >
-            {index + 1}
-          </button>
-        ))}
-      </div> */}
       <div className="mt-10 text-center">
         <Pagination page={page} setPage={setPage} totalPages={totalPages} />
       </div>
-      {console.log(page)}
     </div>
   );
 };

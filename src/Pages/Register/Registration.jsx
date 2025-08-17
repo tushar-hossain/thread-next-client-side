@@ -82,7 +82,6 @@ const Registration = () => {
       setUser(result.user);
       navigate(location.state || "/");
     } catch (error) {
-      console.error("Registration error:", error);
       toast.error("Registration failed. Please try again.");
     }
   };
