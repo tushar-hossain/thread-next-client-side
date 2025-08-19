@@ -36,6 +36,9 @@ const Navbar = () => {
     { to: "/", label: "Home" },
     { to: "/membership", label: "Membership" },
     { to: "/announcement", label: "Announcements" },
+    { to: "/about", label: "About" },
+    { to: "/contact", label: "Contact" },
+    { to: "/explore", label: "Explore" },
   ];
 
   const NavLinks = ({ mobile = false, onClick = () => {} }) => (
@@ -105,7 +108,7 @@ const Navbar = () => {
                 />
                 <div className="h-8 transition-transform duration-200 group-hover:scale-105">
                   <h1 className="text-2xl text-white font-semibold">
-                    Thred Nest
+                    Thread Nest
                   </h1>
                 </div>
               </Link>
@@ -257,7 +260,7 @@ const Navbar = () => {
 
           {/* Mobile User Info */}
           {user && (
-            <div className="pt-4 border-t border-slate-200">
+            <div className=" hidden pt-4 border-t border-slate-200">
               <div className="flex items-center space-x-3 mb-3">
                 <div className="w-10 h-10 rounded-full border-2 border-slate-200 overflow-hidden">
                   <img

@@ -153,10 +153,10 @@ const MyProfile = () => {
                     )}
                   </div>
 
-                  <button className="bg-sky-500 hover:bg-sky-600 text-white px-6 py-2 rounded-lg font-medium transition-all duration-200 flex items-center gap-2 w-fit">
+                  {/* <button className="bg-sky-500 hover:bg-sky-600 text-white px-6 py-2 rounded-lg font-medium transition-all duration-200 flex items-center gap-2 w-fit">
                     <FaEdit size={16} />
                     Edit Profile
-                  </button>
+                  </button> */}
                 </div>
               </div>
             </div>

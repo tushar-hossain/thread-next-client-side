@@ -52,19 +52,6 @@ const AddPost = () => {
     formState: { errors },
   } = useForm();
 
-  // const tagOptions = [
-  //   { value: "javascript", label: "JavaScript" },
-  //   { value: "mongodb", label: "Mongodb" },
-  //   { value: "express", label: "Express" },
-  //   { value: "react", label: "React" },
-  //   { value: "nodejs", label: "Nodejs" },
-  //   { value: "css", label: "CSS" },
-  //   { value: "frontend", label: "Frontend" },
-  //   { value: "authentication", label: "Authentication" },
-  //   { value: "typescript", label: "TypeScript" },
-  //   { value: "backend", label: "Backend" },
-  // ];
-
   const onsubmit = async (data) => {
     const postData = {
       authorName: user.displayName,
@@ -79,22 +66,23 @@ const AddPost = () => {
     };
 
     const res = await axiosSecure.post(`/posts`, postData);
-
     if (res.data.insertedId) {
-      toast.success("Post successful created!");
+      toast.success("Post successfully created!");
       reset();
       setSelectedTags([]);
     }
   };
 
-  // 5 posts if not gold
+  // Limit check for non-gold users
   if (profile?.membership !== "gold" && postCount >= 5) {
     return (
       <div className="text-center mt-10">
-        <p className="mb-4">You've reached your 5 post limit.</p>
+        <p className="mb-4 text-lg text-gray-700">
+          You've reached your 5 post limit.
+        </p>
         <button
           onClick={() => navigate("/membership")}
-          className="btn btn-primary"
+          className="btn btn-primary px-6 py-2"
         >
           Become a Member
         </button>
@@ -105,65 +93,75 @@ const AddPost = () => {
   if (isLoading) return <Loading />;
 
   return (
-    <div>
+    <div className="max-w-3xl mx-auto px-4">
       <Helmet>
         <title>Add Post</title>
       </Helmet>
-      <h2 className="text-xl md:text-2xl font-bold text-primary mb-6">
+
+      {/* Heading */}
+      <h2 className="text-3xl font-bold text-primary mb-3">
         Create a New Post
       </h2>
-      <p className="text-gray-600 mt-1 mb-6">
+      <p className="text-gray-600 mb-6">
         Share your thoughts, ask questions, or start a discussion. Fill out the
         form below to publish your post.
       </p>
+
+      {/* Post Form */}
       <form
         onSubmit={handleSubmit(onsubmit)}
-        className="max-w-xl mx-auto space-y-4 p-4 bg-white rounded-md shadow-md hover:shadow-[0px_10px_1px_rgba(221,_221,_221,_1),_0_10px_20px_rgba(204,_204,_204,_1)]"
+        className="bg-white p-6 rounded-lg shadow-md space-y-4 hover:shadow-lg transition-shadow"
       >
-        <div>
+        {/* Read-only user info */}
+        <div className="space-y-2">
           <input
             type="text"
             readOnly
-            defaultValue={user.displayName}
+            value={user.displayName}
             className="input input-bordered w-full"
           />
-        </div>
-        <div>
           <input
             type="text"
             readOnly
-            defaultValue={user.email}
+            value={user.email}
             className="input input-bordered w-full"
           />
-        </div>
-        <div>
           <input
             type="text"
             readOnly
-            defaultValue={user.photoURL}
+            value={user.photoURL}
             className="input input-bordered w-full"
           />
         </div>
+
+        {/* Post title */}
         <div>
           <input
+            type="text"
             {...register("title", { required: true })}
             placeholder="Post Title"
             className="input input-bordered w-full"
           />
           {errors.title && (
-            <span className="text-red-500">Title is required</span>
+            <span className="text-red-500 text-sm">Title is required</span>
           )}
         </div>
+
+        {/* Post description */}
         <div>
           <textarea
             {...register("description", { required: true })}
             placeholder="Post Description"
-            className="textarea textarea-bordered w-full resize-none"
+            className="textarea textarea-bordered w-full resize-none h-32"
           />
           {errors.description && (
-            <span className="text-red-500">Description is required</span>
+            <span className="text-red-500 text-sm">
+              Description is required
+            </span>
           )}
         </div>
+
+        {/* Tags select */}
         <div>
           <Select
             isMulti
@@ -176,9 +174,10 @@ const AddPost = () => {
           />
         </div>
 
+        {/* Submit button */}
         <button
-          className="btn bg-blue-500 hover:bg-blue-600 text-white transition-all duration-300 text-sm w-full"
           type="submit"
+          className="btn bg-blue-500 hover:bg-blue-600 text-white w-full py-2 transition-all duration-300"
         >
           Submit Post
         </button>

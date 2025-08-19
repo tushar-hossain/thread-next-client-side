@@ -1,12 +1,11 @@
 import React from "react";
 import DashboardNavbar from "../DashboardNavbar/DashboardNavbar";
-import { NavLink } from "react-router";
+import { Link, NavLink } from "react-router";
 import { FaUser, FaPlus, FaClipboardList, FaHome } from "react-icons/fa";
 import useUserRole from "../../../hooks/useUserRole";
 import { FaUserCog, FaFlag, FaBullhorn } from "react-icons/fa";
 import { MdAdminPanelSettings } from "react-icons/md";
 import logo from "../../../../public/logo-tn.png";
-import logoText from "../../../assets/image/logo-text.png";
 
 const Sidebar = () => {
   const { role, authLoading } = useUserRole();
@@ -28,16 +27,18 @@ const Sidebar = () => {
           {/* Sidebar content here */}
 
           <div className="mb-10">
-            <NavLink to="/">
-              <div className="flex items-center gap-1 -px-3">
-                <img
-                  className="w-15 h-15 rounded-full hidden md:block"
-                  src={logo}
-                  alt="brand logo"
-                />
-                <img className="w-30" src={logoText} alt="brand text" />
+            <Link to="/" className="flex items-center space-x-2 group">
+              <img
+                className="w-10 h-10 rounded-full hidden md:block transition-transform duration-200 group-hover:scale-110"
+                src={logo}
+                alt="ThredNest Logo"
+              />
+              <div className="h-8 transition-transform duration-200 group-hover:scale-105">
+                <h1 className="text-2xl text-white font-semibold">
+                  Thread Nest
+                </h1>
               </div>
-            </NavLink>
+            </Link>
           </div>
 
           {role === "user" && !authLoading && (

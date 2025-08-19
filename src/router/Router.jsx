@@ -23,6 +23,11 @@ import PrivacyPolicy from "../Pages/PrivacyPolicy/PrivacyPolicy";
 import TermsOfService from "../Pages/TermsOfService/TermsOfService";
 import ErrorPage from "../Pages/Error/ErrorPage";
 import EditPost from "../Pages/EditPost/EditPost";
+import ForgotPassword from "../Pages/ForgotPassword/ForgotPassword";
+import About from "../Pages/About/About";
+import Contact from "../Pages/Contact/Contact";
+import Explore from "../Pages/explorePosts/explorePosts";
+import Profile from "../Pages/Profile/Profile";
 
 export const router = createBrowserRouter([
   {
@@ -56,6 +61,26 @@ export const router = createBrowserRouter([
       {
         path: "payment",
         Component: Payment,
+      },
+      {
+        path: "/forgot-password",
+        Component: ForgotPassword,
+      },
+      {
+        path: "/about",
+        Component: About,
+      },
+      {
+        path: "/explore",
+        Component: Explore,
+      },
+      {
+        path: "/profile",
+        Component: Profile,
+      },
+      {
+        path: "/contact",
+        Component: Contact,
       },
       {
         path: "edit-post/:id",

@@ -9,7 +9,6 @@ import toast from "react-hot-toast";
 import { Helmet } from "react-helmet-async";
 
 const MyPost = () => {
-  ;
   const { user } = useAuth();
   const axiosSecure = useAxiosSecure();
 
@@ -32,7 +31,7 @@ const MyPost = () => {
       return res.data;
     },
     onSuccess: () => {
-      toast.success("Post deleted successful.");
+      toast.success("Post deleted successfully.");
       refetch();
     },
   });
@@ -45,13 +44,11 @@ const MyPost = () => {
       confirmButtonText: "Delete",
       denyButtonText: `Don't delete`,
     }).then((result) => {
-      /* Read more about isConfirmed, isDenied below */
       if (result.isConfirmed) {
         deleteMutation.mutate(id);
-
-        Swal.fire("Delete!", "", "success");
+        Swal.fire("Deleted!", "", "success");
       } else if (result.isDenied) {
-        Swal.fire("Changes are not delete", "", "info");
+        Swal.fire("Post is safe", "", "info");
       }
     });
   };
@@ -59,36 +56,40 @@ const MyPost = () => {
   if (isLoading) return <Loading />;
 
   return (
-    <div className="overflow-x-auto">
+    <div className="w-full overflow-x-auto px-4 my-10">
       <Helmet>
-        <title>My Post</title>
+        <title>My Posts</title>
       </Helmet>
-      <h2 className="text-xl md:text-2xl font-bold text-primary mb-6">
+
+      {/* Page Heading */}
+      <h2 className="text-2xl md:text-3xl font-bold text-primary mb-3">
         My Posts
       </h2>
-      <p className="text-gray-600 mt-1 mb-6">
-        Here you can view and manage all the posts you've shared. View Comments,
-        delete, or track the performance of each post.
+      <p className="text-gray-600 mb-6">
+        View and manage all your posts. You can check comments, delete posts,
+        and track the performance of each post.
       </p>
-      <table className="table table-zebra w-full bg-base-200">
+
+      {/* Table */}
+      <table className="table table-zebra w-full bg-base-200 rounded-lg shadow-md">
         <thead>
-          <tr>
+          <tr className="bg-sky-500 text-white">
             <th>#</th>
             <th>Title</th>
             <th>Votes</th>
-            <th>Comment</th>
+            <th>Comments</th>
             <th>Delete</th>
           </tr>
         </thead>
         <tbody>
           {myPosts?.map((post, index) => (
-            <tr key={post._id}>
+            <tr key={post._id} className="hover:bg-slate-100">
               <td>{index + 1}</td>
               <td>{post.title}</td>
               <td>{(post.upVote || 0) - (post.downVote || 0)}</td>
               <td>
                 <Link to={`/dashboard/commentsPage/${post._id}`}>
-                  <button className="btn bg-blue-500 hover:bg-blue-600 text-white transition-all duration-300 text-sm py-2">
+                  <button className="btn bg-blue-500 hover:bg-blue-600 text-white transition-all duration-300 text-sm py-1 px-2">
                     View Comments
                   </button>
                 </Link>
@@ -105,6 +106,13 @@ const MyPost = () => {
           ))}
         </tbody>
       </table>
+
+      {/* Empty state */}
+      {myPosts?.length === 0 && (
+        <p className="text-center text-gray-500 mt-6">
+          You have not created any posts yet.
+        </p>
+      )}
     </div>
   );
 };
